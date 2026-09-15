@@ -1,16 +1,21 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, Sphere } from "@react-three/drei";
-import type { Mesh } from "three";
+import { MathUtils, type Mesh } from "three";
+
+interface NetworkCoreProps {
+  /** 0-1 hero scroll progress; the core swells as the camera closes in. */
+  scrollProgress?: RefObject<number>;
+}
 
 /**
  * The hero's centerpiece: a refractive "glass core" representing CMC's
  * network — it slowly rotates and breathes, bending light and color through
- * itself like liquid glass.
+ * itself like liquid glass, and swells as the camera dollies in on scroll.
  */
-export function NetworkCore() {
+export function NetworkCore({ scrollProgress }: NetworkCoreProps = {}) {
   const meshRef = useRef<Mesh>(null);
 
   useFrame((state, delta) => {
@@ -20,8 +25,10 @@ export function NetworkCore() {
     mesh.rotation.y += delta * 0.1;
     mesh.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.15;
 
+    const progress = scrollProgress?.current ?? 0;
     const breathe = 1 + Math.sin(state.clock.elapsedTime * 0.6) * 0.03;
-    mesh.scale.setScalar(breathe);
+    const grow = MathUtils.lerp(1, 1.35, progress);
+    mesh.scale.setScalar(breathe * grow);
   });
 
   return (

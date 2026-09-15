@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useGlowTexture } from "./glowTexture";
@@ -9,6 +9,12 @@ const NODE_COUNT = 64;
 const NEIGHBORS_PER_NODE = 2;
 const MIN_RADIUS = 2.3;
 const MAX_RADIUS = 4.2;
+const SCROLL_SWIRL = 1.1;
+
+interface SignalFieldProps {
+  /** 0-1 hero scroll progress; adds a slow swirl on top of pointer parallax. */
+  scrollProgress?: RefObject<number>;
+}
 
 interface NodeSeed {
   base: THREE.Vector3;
@@ -62,7 +68,7 @@ function buildEdges(seeds: NodeSeed[]): [number, number][] {
 }
 
 /** A field of glowing "customer node" particles, gently drifting and linked by light-trails. */
-export function SignalField() {
+export function SignalField({ scrollProgress }: SignalFieldProps = {}) {
   const seeds = useMemo(() => generateSeeds(NODE_COUNT), []);
   const edges = useMemo(() => buildEdges(seeds), [seeds]);
   const glowTexture = useGlowTexture();
@@ -130,7 +136,8 @@ export function SignalField() {
     if (linesAttr) linesAttr.needsUpdate = true;
 
     if (groupRef.current) {
-      const targetRotY = state.pointer.x * 0.25;
+      const swirl = (scrollProgress?.current ?? 0) * SCROLL_SWIRL;
+      const targetRotY = state.pointer.x * 0.25 + swirl;
       const targetRotX = -state.pointer.y * 0.15;
       groupRef.current.rotation.y = THREE.MathUtils.damp(
         groupRef.current.rotation.y,

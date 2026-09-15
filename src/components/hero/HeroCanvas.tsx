@@ -54,8 +54,8 @@ export function HeroCanvas({ scrollProgress }: HeroCanvasProps) {
             target={[0, 0, 0]}
           />
         </Environment>
-        <NetworkCore />
-        <SignalField />
+        <NetworkCore scrollProgress={scrollProgress} />
+        <SignalField scrollProgress={scrollProgress} />
       </Suspense>
 
       <CameraRig scrollProgress={scrollProgress} />
