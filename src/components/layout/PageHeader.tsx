@@ -5,26 +5,35 @@ interface PageHeaderProps {
   eyebrow: string;
   heading: string;
   body?: string;
-  image: { src: string; alt: string };
+  /** Omit for a plain dark band (e.g. blog post titles with no header photo). */
+  image?: { src: string; alt: string };
+  /** A shorter band, for pages with less to say up top (e.g. a blog post). */
+  compact?: boolean;
 }
 
 /**
- * A consistent, photo-backed header band used at the top of every inner
- * page. Deliberately kept as a dark band (like the homepage hero) against
- * the otherwise light theme — literal colors here, not the ink/paper
- * tokens, so it doesn't flip with the rest of the site.
+ * A consistent header band used at the top of every inner page. Deliberately
+ * kept as a dark band (like the homepage hero) against the otherwise light
+ * theme — literal colors here, not the ink/paper tokens, so it doesn't flip
+ * with the rest of the site. This also matters for the Navbar: it assumes
+ * "not scrolled yet" means "sitting on a dark background", which only holds
+ * if every page actually opens on one of these (or the WebGL hero).
  */
-export function PageHeader({ eyebrow, heading, body, image }: PageHeaderProps) {
+export function PageHeader({ eyebrow, heading, body, image, compact = false }: PageHeaderProps) {
   return (
-    <div className="relative flex h-[52vh] min-h-[420px] items-end overflow-hidden bg-black pt-24">
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="animate-[kenburns_18s_ease-in-out_infinite_alternate] object-cover opacity-45"
-      />
+    <div
+      className={`relative flex ${compact ? "h-[32vh] min-h-[280px]" : "h-[52vh] min-h-[420px]"} items-end overflow-hidden bg-black pt-24`}
+    >
+      {image ? (
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="animate-[kenburns_18s_ease-in-out_infinite_alternate] object-cover opacity-45"
+        />
+      ) : null}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
       <NoiseOverlay />

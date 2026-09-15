@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { blogPosts, getBlogPost } from "@/data/blog";
 
 interface BlogPostPageProps {
@@ -27,9 +28,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getBlogPost(slug);
   if (!post) notFound();
 
+  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
-    <article className="bg-ink pb-24 pt-32 sm:pb-32">
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+    <article className="bg-ink pb-24 sm:pb-32">
+      <PageHeader eyebrow={formattedDate} heading={post.title} compact />
+
+      <div className="mx-auto max-w-3xl px-6 pt-14 lg:px-8">
         <Link
           href="/blogs"
           className="inline-flex items-center gap-2 text-sm font-semibold text-paper/60 hover:text-paper"
@@ -37,18 +46,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           &larr; Back to blog
         </Link>
 
-        <time className="mt-8 block text-xs font-semibold uppercase tracking-wider text-accent-ink">
-          {new Date(post.date).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </time>
-        <h1 className="mt-3 text-balance font-display text-3xl font-medium leading-tight tracking-tight text-paper sm:text-4xl">
-          {post.title}
-        </h1>
-
-        <div className="mt-10 space-y-6 border-t border-line/70 pt-10">
+        <div className="mt-8 space-y-6 border-t border-line/70 pt-10">
           {post.paragraphs.map((paragraph, i) => (
             <p key={i} className="text-base leading-relaxed text-paper/75">
               {paragraph}
