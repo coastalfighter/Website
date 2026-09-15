@@ -24,30 +24,30 @@ export default function ContactPage() {
             <h2 className="font-display text-2xl font-semibold text-paper">Get in touch</h2>
             <dl className="mt-8 space-y-6">
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-400">
+                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                   Phone
                 </dt>
                 <dd className="mt-1">
-                  <a href={siteConfig.phoneHref} className="text-lg text-paper hover:text-brand-300">
+                  <a href={siteConfig.phoneHref} className="text-lg text-paper hover:text-brand-ink">
                     {siteConfig.phone}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-400">
+                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                   Email
                 </dt>
                 <dd className="mt-1">
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="text-lg text-paper hover:text-brand-300"
+                    className="text-lg text-paper hover:text-brand-ink"
                   >
                     {siteConfig.email}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-400">
+                <dt className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                   Office
                 </dt>
                 <dd className="mt-1 text-lg text-paper">

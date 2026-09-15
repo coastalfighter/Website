@@ -13,12 +13,17 @@ import { cn } from "@/lib/cn";
 interface TiltCardProps {
   children: React.ReactNode;
   className?: string;
+  /** Stagger delay (seconds) for the scroll-in reveal, e.g. index * 0.08. */
+  delay?: number;
 }
 
 const MAX_TILT = 10;
 
-/** A card that tilts in 3D toward the cursor and lifts a soft glow beneath it. */
-export function TiltCard({ children, className }: TiltCardProps) {
+/**
+ * A card that reveals on scroll-in, then tilts in 3D toward the cursor and
+ * lifts a soft glow beneath it on hover.
+ */
+export function TiltCard({ children, className, delay = 0 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
@@ -50,6 +55,10 @@ export function TiltCard({ children, className }: TiltCardProps) {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{ rotateX, rotateY, transformPerspective: 800, transformStyle: "preserve-3d" }}
       className={cn(
         "group relative overflow-hidden rounded-2xl border border-line/80 bg-surface/60 p-8 transition-colors duration-300 hover:border-brand-400/50",

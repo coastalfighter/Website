@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           &larr; Back to blog
         </Link>
 
-        <time className="mt-8 block text-xs font-semibold uppercase tracking-wider text-accent-400">
+        <time className="mt-8 block text-xs font-semibold uppercase tracking-wider text-accent-ink">
           {new Date(post.date).toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-14 border-t border-line/70 pt-8">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-2 rounded-full border border-line/80 px-5 py-2.5 text-sm font-semibold text-paper transition-colors duration-300 hover:border-brand-400 hover:text-brand-300"
+            className="inline-flex items-center gap-2 rounded-full border border-line/80 px-5 py-2.5 text-sm font-semibold text-paper transition-colors duration-300 hover:border-brand-400 hover:text-brand-ink"
           >
             &larr; All posts
           </Link>

@@ -27,7 +27,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xs font-semibold text-paper/70 transition-colors hover:border-brand-400 hover:text-brand-300"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xs font-semibold text-paper/70 transition-colors hover:border-brand-400 hover:text-brand-ink"
                 >
                   {social.label.slice(0, 2)}
                 </a>
@@ -86,7 +86,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-line pt-8 text-xs text-paper/40 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-line pt-8 text-xs text-paper/60 sm:flex-row">
           <p>
             &copy; {year} {siteConfig.legalName}. All rights reserved.
           </p>

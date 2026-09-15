@@ -17,7 +17,7 @@ export function FoundationSection() {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-400">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
             {foundation.eyebrow}
           </p>
           <h2 className="text-balance font-display text-3xl font-medium leading-tight tracking-tight text-paper sm:text-4xl">
@@ -26,7 +26,7 @@ export function FoundationSection() {
           <p className="mt-4 text-base leading-relaxed text-paper/65">{foundation.body}</p>
 
           <div className="mt-10 border-t border-line/70 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
               {teamGrowth.eyebrow}
             </p>
             <h3 className="mt-2 font-display text-xl font-semibold text-paper">

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { Reveal } from "./Reveal";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -16,15 +17,11 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div
-      className={cn(
-        "max-w-2xl",
-        align === "center" && "mx-auto text-center",
-        className
-      )}
+    <Reveal
+      className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}
     >
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-400">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
           {eyebrow}
         </p>
       ) : null}
@@ -32,6 +29,6 @@ export function SectionHeading({
         {heading}
       </h2>
       {body ? <p className="mt-4 text-base leading-relaxed text-paper/65">{body}</p> : null}
-    </div>
+    </Reveal>
   );
 }

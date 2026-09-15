@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { CountUp } from "@/components/ui/CountUp";
+import { Reveal } from "@/components/ui/Reveal";
 import { MagneticCta } from "@/components/hero/MagneticCta";
 import { whoWeAre, processPillars, missionOfferings, expertServices } from "@/data/whatWeDo";
 
@@ -25,12 +26,15 @@ export default function WhatWeDoPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <SectionHeading eyebrow={whoWeAre.eyebrow} heading={whoWeAre.heading} body={whoWeAre.body} />
-            <div className="rounded-2xl border border-line/80 bg-surface/50 p-10 text-center">
+            <Reveal
+              delay={0.1}
+              className="rounded-2xl border border-line/80 bg-surface/50 p-10 text-center"
+            >
               <p className="font-display text-5xl font-semibold text-paper">
                 <CountUp value={whoWeAre.stat.value} suffix={whoWeAre.stat.suffix} />
               </p>
               <p className="mt-2 text-sm text-paper/60">{whoWeAre.stat.label}</p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -45,15 +49,15 @@ export default function WhatWeDoPage() {
           />
           <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line/80 bg-line/80 sm:grid-cols-2 lg:grid-cols-4">
             {processPillars.map((pillar, i) => (
-              <div key={pillar.title} className="bg-ink-2 p-8">
-                <span className="font-display text-sm font-semibold text-accent-400">
+              <Reveal key={pillar.title} delay={i * 0.08} className="h-full bg-ink-2 p-8">
+                <span className="font-display text-sm font-semibold text-accent-ink">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-display text-lg font-semibold text-paper">
                   {pillar.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{pillar.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -68,9 +72,10 @@ export default function WhatWeDoPage() {
             className="mx-auto"
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-3">
-            {missionOfferings.map((offering) => (
-              <div
+            {missionOfferings.map((offering, i) => (
+              <Reveal
                 key={offering.title}
+                delay={i * 0.08}
                 className="rounded-2xl border border-line/80 bg-surface/40 p-8 text-center"
               >
                 <h3 className="font-display text-lg font-semibold text-paper">
@@ -79,7 +84,7 @@ export default function WhatWeDoPage() {
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">
                   {offering.description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -94,8 +99,8 @@ export default function WhatWeDoPage() {
             className="mx-auto"
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {expertServices.map((service) => (
-              <TiltCard key={service.title}>
+            {expertServices.map((service, i) => (
+              <TiltCard key={service.title} delay={i * 0.06}>
                 <h3 className="font-display text-lg font-semibold text-paper">{service.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{service.description}</p>
               </TiltCard>

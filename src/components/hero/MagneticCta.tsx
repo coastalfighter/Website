@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 interface MagneticCtaProps {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "onDark";
   className?: string;
 }
 
@@ -51,9 +51,11 @@ export function MagneticCta({
         onMouseLeave={handleMouseLeave}
         className={cn(
           "group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold transition-colors duration-300",
-          variant === "primary"
-            ? "bg-paper text-ink hover:bg-brand-300"
-            : "border border-line/80 text-paper hover:border-brand-400 hover:text-brand-300",
+          variant === "primary" && "bg-paper text-ink hover:bg-brand-300",
+          variant === "secondary" &&
+            "border border-line/80 text-paper hover:border-brand-400 hover:text-brand-ink",
+          variant === "onDark" &&
+            "border border-white/20 text-white hover:border-brand-300 hover:text-brand-300",
           className
         )}
       >

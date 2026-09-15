@@ -7,11 +7,14 @@ import { navLinks, siteConfig } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
 
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({ href, label, light }: { href: string; label: string; light: boolean }) {
   return (
     <Link
       href={href}
-      className="group relative px-1 py-2 text-sm font-medium text-paper/80 transition-colors hover:text-paper"
+      className={cn(
+        "group relative px-1 py-2 text-sm font-medium transition-colors",
+        light ? "text-white/85 hover:text-white" : "text-paper/80 hover:text-paper"
+      )}
     >
       {label}
       <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-brand-400 to-accent-400 transition-transform duration-300 ease-out group-hover:scale-x-100" />
@@ -22,6 +25,11 @@ function NavLink({ href, label }: { href: string; label: string }) {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Every page opens on a dark band (the WebGL hero on "/", a photo
+  // PageHeader everywhere else), so "not scrolled yet" reliably means
+  // "sitting on a dark background" — that's what drives the light/dark swap.
+  const light = !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -48,19 +56,19 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href="/" className="relative z-10 flex items-center gap-2" aria-label={`${siteConfig.name} home`}>
-          <Logo />
+          <Logo light={light} />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <NavLink key={link.href} href={link.href} label={link.label} />
+            <NavLink key={link.href} href={link.href} label={link.label} light={light} />
           ))}
         </div>
 
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="relative overflow-hidden rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-105 active:scale-95"
+            className="relative overflow-hidden rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-300 hover:scale-105 hover:bg-brand-400 active:scale-95"
           >
             Get Started
           </Link>
@@ -75,15 +83,15 @@ export function Navbar() {
         >
           <motion.span
             animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-            className="h-px w-6 bg-paper"
+            className={cn("h-px w-6", menuOpen || !light ? "bg-paper" : "bg-white")}
           />
           <motion.span
             animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="h-px w-6 bg-paper"
+            className={cn("h-px w-6", menuOpen || !light ? "bg-paper" : "bg-white")}
           />
           <motion.span
             animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-            className="h-px w-6 bg-paper"
+            className={cn("h-px w-6", menuOpen || !light ? "bg-paper" : "bg-white")}
           />
         </button>
       </nav>
@@ -111,7 +119,7 @@ export function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-2 rounded-full bg-paper px-4 py-3 text-center text-base font-semibold text-ink"
+                className="mt-2 rounded-full bg-brand-500 px-4 py-3 text-center text-base font-semibold text-white"
               >
                 Get Started
               </Link>

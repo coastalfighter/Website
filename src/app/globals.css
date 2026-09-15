@@ -4,25 +4,37 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
 
-  --color-ink: #05070d;
-  --color-ink-2: #0b0f1a;
-  --color-surface: #0e1320;
-  --color-surface-2: #141a2b;
-  --color-line: #232b40;
+  /* A bright, professional light theme. "ink" and "paper" keep their names
+     from the original dark theme (ink = section background, paper = the
+     text/foreground color that sits on it) so components didn't need to
+     change — only these token values did. Hero and PageHeader are the two
+     intentional exceptions: they stay dark bands by using literal colors
+     (bg-black, text-white) instead of these tokens. */
+  --color-ink: #ffffff;
+  --color-ink-2: #f4f6fa;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef1f6;
+  --color-line: #e3e7ee;
 
-  --color-paper: #f7f8fb;
-  --color-paper-dim: #e7eaf2;
+  --color-paper: #0f172a;
+  --color-paper-dim: #475467;
 
   --color-brand-500: #3b82f6;
   --color-brand-400: #60a5fa;
   --color-brand-300: #93c5fd;
+  /* A darker blue for text/links on the light background — brand-300/400 are
+     too light to meet contrast requirements as foreground text on white. */
+  --color-brand-ink: #1d4ed8;
 
   --color-accent-500: #22d3c7;
   --color-accent-400: #5eead4;
+  /* Same reasoning as brand-ink, for the teal accent used in eyebrow labels. */
+  --color-accent-ink: #0f766e;
 
   --color-signal-500: #a78bfa;
 
   --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-400) 35%, transparent);
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 8px -2px rgb(15 23 42 / 0.06);
 
   --animate-marquee: marquee 32s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -57,7 +69,7 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 

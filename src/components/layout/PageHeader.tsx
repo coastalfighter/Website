@@ -8,10 +8,15 @@ interface PageHeaderProps {
   image: { src: string; alt: string };
 }
 
-/** A consistent, photo-backed header band used at the top of every inner page. */
+/**
+ * A consistent, photo-backed header band used at the top of every inner
+ * page. Deliberately kept as a dark band (like the homepage hero) against
+ * the otherwise light theme — literal colors here, not the ink/paper
+ * tokens, so it doesn't flip with the rest of the site.
+ */
 export function PageHeader({ eyebrow, heading, body, image }: PageHeaderProps) {
   return (
-    <div className="relative flex h-[52vh] min-h-[420px] items-end overflow-hidden bg-ink pt-24">
+    <div className="relative flex h-[52vh] min-h-[420px] items-end overflow-hidden bg-black pt-24">
       <Image
         src={image.src}
         alt={image.alt}
@@ -20,19 +25,19 @@ export function PageHeader({ eyebrow, heading, body, image }: PageHeaderProps) {
         sizes="100vw"
         className="animate-[kenburns_18s_ease-in-out_infinite_alternate] object-cover opacity-45"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
       <NoiseOverlay />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-14 lg:px-8">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-400">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-teal-300">
           {eyebrow}
         </p>
-        <h1 className="max-w-3xl text-balance font-display text-4xl font-medium leading-tight tracking-tight text-paper sm:text-5xl">
+        <h1 className="max-w-3xl text-balance font-display text-4xl font-medium leading-tight tracking-tight text-white sm:text-5xl">
           {heading}
         </h1>
         {body ? (
-          <p className="mt-4 max-w-2xl text-balance text-lg leading-relaxed text-paper/70">
+          <p className="mt-4 max-w-2xl text-balance text-lg leading-relaxed text-white/70">
             {body}
           </p>
         ) : null}

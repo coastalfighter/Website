@@ -31,7 +31,10 @@ export function AvatarInitials({
   return (
     <div
       className={cn(
-        "flex aspect-square w-full items-center justify-center rounded-xl bg-linear-to-br text-2xl font-bold text-ink",
+        // Fixed dark text: these gradients are always mid-brightness brand
+        // colors regardless of site theme, so text-ink (which flips with
+        // the theme) would go white-on-light-gradient and vanish.
+        "flex aspect-square w-full items-center justify-center rounded-xl bg-linear-to-br text-2xl font-bold text-slate-900",
         gradient,
         className
       )}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { getBlogPost } from "@/data/blog";
 
 const FEATURED_SLUGS = [
@@ -26,30 +27,31 @@ export function BlogPreview() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blogs/${post.slug}`}
-              className="group flex flex-col rounded-2xl border border-line/80 bg-surface/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40"
-            >
-              <time className="text-xs font-semibold uppercase tracking-wider text-accent-400">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </time>
-              <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-paper">
-                {post.title}
-              </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-paper/60">{post.excerpt}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-paper/80 group-hover:text-brand-300">
-                Read now
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  &rarr;
+          {posts.map((post, i) => (
+            <Reveal key={post.slug} delay={i * 0.08}>
+              <Link
+                href={`/blogs/${post.slug}`}
+                className="group flex h-full flex-col rounded-2xl border border-line/80 bg-surface/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40"
+              >
+                <time className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+                <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-paper">
+                  {post.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-paper/60">{post.excerpt}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-paper/80 group-hover:text-brand-ink">
+                  Read now
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

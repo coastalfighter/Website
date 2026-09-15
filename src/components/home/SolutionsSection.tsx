@@ -35,9 +35,9 @@ export function SolutionsSection() {
           className="mx-auto"
         />
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {solutions.map((solution) => (
-            <TiltCard key={solution.title}>
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-500/15 text-brand-300">
+          {solutions.map((solution, i) => (
+            <TiltCard key={solution.title} delay={i * 0.08}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-500/10 text-brand-ink">
                 {ICONS[solution.icon]}
               </div>
               <h3 className="mt-6 font-display text-xl font-semibold text-paper">

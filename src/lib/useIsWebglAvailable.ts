@@ -4,15 +4,12 @@ import { useSyncExternalStore } from "react";
 
 let cachedResult: boolean | null = null;
 
-function detectWebgl(): boolean {
+function detectWebgl2(): boolean {
   if (cachedResult !== null) return cachedResult;
 
   try {
     const canvas = document.createElement("canvas");
-    cachedResult = Boolean(
-      window.WebGLRenderingContext &&
-        (canvas.getContext("webgl2") || canvas.getContext("webgl"))
-    );
+    cachedResult = Boolean(canvas.getContext("webgl2"));
   } catch {
     cachedResult = false;
   }
@@ -32,5 +29,5 @@ function getServerSnapshot(): boolean | null {
 
 /** Returns `null` while detection is pending (SSR-safe), then a boolean. */
 export function useIsWebglAvailable(): boolean | null {
-  return useSyncExternalStore(subscribe, detectWebgl, getServerSnapshot);
+  return useSyncExternalStore(subscribe, detectWebgl2, getServerSnapshot);
 }

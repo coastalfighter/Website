@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { CountUp } from "@/components/ui/CountUp";
 import { MagneticCta } from "@/components/hero/MagneticCta";
+import { Reveal } from "@/components/ui/Reveal";
 import { whatDrivesUs, leadershipTeam, provenResults } from "@/data/about";
 import { pressLogos } from "@/data/site";
 
@@ -39,7 +40,7 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
-              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-400">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Mission
               </h3>
               <p className="mt-3 text-base leading-relaxed text-paper/75">
@@ -47,7 +48,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
-              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-400">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Vision
               </h3>
               <p className="mt-3 text-base leading-relaxed text-paper/75">
@@ -55,7 +56,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
-              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-400">
+              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Values
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -83,7 +84,7 @@ export default function AboutPage() {
           </div>
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {leadershipTeam.map((member, i) => (
-              <div key={member.name} className="group text-center">
+              <Reveal key={member.name} delay={(i % 5) * 0.05} className="group text-center">
                 <AvatarInitials
                   name={member.name}
                   seed={i}
@@ -91,7 +92,7 @@ export default function AboutPage() {
                 />
                 <p className="mt-3 font-semibold text-paper">{member.name}</p>
                 <p className="text-xs text-paper/55">{member.title}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -106,16 +107,17 @@ export default function AboutPage() {
             className="mx-auto"
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-3">
-            {provenResults.map((result) => (
-              <div
+            {provenResults.map((result, i) => (
+              <Reveal
                 key={result.label}
+                delay={i * 0.08}
                 className="rounded-2xl border border-line/80 bg-surface/40 p-10 text-center"
               >
                 <p className="font-display text-5xl font-semibold text-paper">
                   <CountUp value={result.value} suffix={result.suffix} />
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{result.label}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -123,7 +125,7 @@ export default function AboutPage() {
 
       <section className="border-t border-line/70 bg-ink-2 py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/40">
+          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/60">
             Trusted by industry leaders
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">

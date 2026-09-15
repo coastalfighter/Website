@@ -7,7 +7,7 @@ export function PartnersMarquee() {
   return (
     <section className="border-y border-line/70 bg-ink-2 py-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/40">
+        <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/60">
           Authorized dealer &amp; sales partner for
         </p>
       </div>

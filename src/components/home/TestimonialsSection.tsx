@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
+import { Reveal } from "@/components/ui/Reveal";
 import { testimonials } from "@/data/home";
 
 export function TestimonialsSection() {
@@ -14,8 +15,9 @@ export function TestimonialsSection() {
         />
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, i) => (
-            <div
+            <Reveal
               key={testimonial.name}
+              delay={i * 0.06}
               className="group rounded-2xl border border-line/80 bg-surface/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:shadow-glow"
             >
               <div className="flex items-center gap-3">
@@ -26,7 +28,7 @@ export function TestimonialsSection() {
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-paper/65">{testimonial.detail}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

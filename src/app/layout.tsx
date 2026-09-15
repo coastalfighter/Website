@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import { siteConfig } from "@/data/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgressBar } from "@/components/layout/ScrollProgressBar";
 import "./globals.css";
 
 const inter = Inter({
@@ -50,6 +51,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <ScrollProgressBar />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

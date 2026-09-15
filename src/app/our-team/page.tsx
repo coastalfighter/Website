@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
+import { Reveal } from "@/components/ui/Reveal";
 import { leadershipTeam } from "@/data/about";
 import { teamMission, serviceAreas, teamPartners, programTiers, teamQuote } from "@/data/ourTeam";
 
@@ -27,11 +28,15 @@ export default function OurTeamPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Our People" heading="Three service areas, one growth engine" />
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {serviceAreas.map((area) => (
-              <div key={area.title} className="rounded-2xl border border-line/80 bg-surface/40 p-8">
+            {serviceAreas.map((area, i) => (
+              <Reveal
+                key={area.title}
+                delay={i * 0.08}
+                className="rounded-2xl border border-line/80 bg-surface/40 p-8"
+              >
                 <h3 className="font-display text-lg font-semibold text-paper">{area.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{area.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -42,7 +47,7 @@ export default function OurTeamPage() {
           <SectionHeading eyebrow="Leadership" heading="Built for growth" align="center" className="mx-auto" />
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {leadershipTeam.map((member, i) => (
-              <div key={member.name} className="group text-center">
+              <Reveal key={member.name} delay={(i % 5) * 0.05} className="group text-center">
                 <AvatarInitials
                   name={member.name}
                   seed={i}
@@ -50,7 +55,7 @@ export default function OurTeamPage() {
                 />
                 <p className="mt-3 font-semibold text-paper">{member.name}</p>
                 <p className="text-xs text-paper/55">{member.title}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -64,13 +69,13 @@ export default function OurTeamPage() {
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line/80 bg-line/80 sm:grid-cols-3">
             {programTiers.map((tier, i) => (
-              <div key={tier.title} className="bg-ink p-8">
-                <span className="font-display text-sm font-semibold text-accent-400">
+              <Reveal key={tier.title} delay={i * 0.08} className="h-full bg-ink p-8">
+                <span className="font-display text-sm font-semibold text-accent-ink">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-display text-lg font-semibold text-paper">{tier.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{tier.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -80,11 +85,15 @@ export default function OurTeamPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" />
           <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
-            {teamPartners.map((partner) => (
-              <div key={partner.name} className="border-b border-line/60 pb-3">
+            {teamPartners.map((partner, i) => (
+              <Reveal
+                key={partner.name}
+                delay={(i % 4) * 0.05}
+                className="border-b border-line/60 pb-3"
+              >
                 <p className="text-sm font-medium text-paper/85">{partner.name}</p>
-                <p className="text-xs text-paper/45">{partner.org}</p>
-              </div>
+                <p className="text-xs text-paper/60">{partner.org}</p>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -95,7 +104,7 @@ export default function OurTeamPage() {
           <p className="text-balance font-display text-2xl italic leading-snug text-paper/85 sm:text-3xl">
             &ldquo;{teamQuote.text}&rdquo;
           </p>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-accent-400">
+          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-accent-ink">
             &mdash; {teamQuote.author}
           </p>
         </div>
