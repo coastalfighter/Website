@@ -1,0 +1,124 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { navLinks, siteConfig } from "@/data/site";
+import { cn } from "@/lib/cn";
+import { Logo } from "./Logo";
+
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="group relative px-1 py-2 text-sm font-medium text-paper/80 transition-colors hover:text-paper"
+    >
+      {label}
+      <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-brand-400 to-accent-400 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+    </Link>
+  );
+}
+
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  return (
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        scrolled
+          ? "border-b border-line/80 bg-ink/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
+      <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <Link href="/" className="relative z-10 flex items-center gap-2" aria-label={`${siteConfig.name} home`}>
+          <Logo />
+        </Link>
+
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <NavLink key={link.href} href={link.href} label={link.label} />
+          ))}
+        </div>
+
+        <div className="hidden md:block">
+          <Link
+            href="/contact"
+            className="relative overflow-hidden rounded-full bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-105 active:scale-95"
+          >
+            Get Started
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+        >
+          <motion.span
+            animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+            className="h-px w-6 bg-paper"
+          />
+          <motion.span
+            animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+            className="h-px w-6 bg-paper"
+          />
+          <motion.span
+            animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+            className="h-px w-6 bg-paper"
+          />
+        </button>
+      </nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden border-b border-line bg-ink md:hidden"
+          >
+            <div className="flex flex-col gap-1 px-6 py-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-paper/90 hover:bg-surface"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 rounded-full bg-paper px-4 py-3 text-center text-base font-semibold text-ink"
+              >
+                Get Started
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
