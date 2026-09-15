@@ -17,7 +17,10 @@ export default function BlogIndexPage() {
         eyebrow="Blog"
         heading="Field-tested lessons on sales and leadership"
         body="Notes from the field on goal-setting, coaching, and building a career in customer acquisition."
-        image={{ src: "/images/photos/section-2.jpg", alt: "CMC Group team collaborating" }}
+        image={{
+          src: "/images/photos/section-2.jpg",
+          alt: "A \"Success — go get it\" chalkboard from the CMC office",
+        }}
       />
 
       <section className="bg-ink py-24 sm:py-32">

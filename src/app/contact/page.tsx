@@ -15,7 +15,7 @@ export default function ContactPage() {
         eyebrow="Contact Us"
         heading="Start a conversation"
         body="Tell us about your brand and your market — we'll follow up within one business day."
-        image={{ src: "/images/photos/mes02829.webp", alt: "The CMC Group office in Cerritos, CA" }}
+        image={{ src: "/images/photos/mes02829.webp", alt: "CMC Group team members in conversation" }}
       />
 
       <section className="bg-ink py-24 sm:py-32">

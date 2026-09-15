@@ -7,8 +7,8 @@ export function FoundationSection() {
       <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
         <div className="relative aspect-4/5 overflow-hidden rounded-2xl border border-line/70">
           <Image
-            src="/images/photos/img-2266.jpeg"
-            alt="A CMC Group field sales representative at work"
+            src="/images/photos/img-2204.jpeg"
+            alt="The CMC Group team reviewing performance numbers on the board"
             fill
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="object-cover"

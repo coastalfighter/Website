@@ -17,7 +17,10 @@ export default function OurTeamPage() {
         eyebrow="Our Team"
         heading={teamMission.heading}
         body={teamMission.body}
-        image={{ src: "/images/photos/mes02960.webp", alt: "The CMC Group team in the field" }}
+        image={{
+          src: "/images/photos/mes02960.webp",
+          alt: "CMC Group leadership reviewing team performance",
+        }}
       />
 
       <section className="bg-ink py-24 sm:py-32">

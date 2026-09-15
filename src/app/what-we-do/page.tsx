@@ -18,7 +18,7 @@ export default function WhatWeDoPage() {
         eyebrow="What We Do"
         heading="The blueprint for performance, built market by market"
         body="Strategy, training, execution, and performance — the four pillars behind every brand CMC represents."
-        image={{ src: "/images/photos/section-3.jpg", alt: "CMC Group field team on site" }}
+        image={{ src: "/images/photos/section-3.jpg", alt: "The CMC Group team at a company celebration" }}
       />
 
       <section className="bg-ink py-24 sm:py-32">

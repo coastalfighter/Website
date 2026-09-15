@@ -20,7 +20,7 @@ export default function AboutPage() {
         eyebrow="About CMC"
         heading="Professionalism meets performance"
         body={whatDrivesUs.goalsBody}
-        image={{ src: "/images/photos/img-2281.jpeg", alt: "CMC Group leadership and team" }}
+        image={{ src: "/images/photos/img-2281.jpeg", alt: "The CMC Group team celebrating together" }}
       />
 
       <section className="bg-ink py-24 sm:py-32">
