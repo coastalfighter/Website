@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { LogoMark } from "./LogoMark";
 
 interface LogoProps {
   /** Use over the dark hero/page-header bands, where paper/ink text would vanish. */
@@ -6,20 +7,12 @@ interface LogoProps {
   className?: string;
 }
 
-/**
- * A typographic wordmark. The source site's exported logo asset is a
- * near-invisible 10%-opacity raster pattern (a broken Figma/Webflow export),
- * so a crisp, scalable text lockup is used instead of shipping a broken image.
- */
+/** The shield mark plus the "CMC Group" wordmark — the shield's blue/red/white
+ * stays fixed regardless of theme; only the wordmark follows light/dark. */
 export function Logo({ light = false, className }: LogoProps) {
   return (
-    <span className={cn("flex items-center gap-2 font-display", className)}>
-      {/* The badge's gradient is always a light blue/teal regardless of site
-          theme, so its text stays a fixed dark shade rather than following
-          the ink/paper tokens (which would turn white on white on light body sections). */}
-      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-brand-400 to-accent-400 text-sm font-bold text-slate-900">
-        C
-      </span>
+    <span className={cn("flex items-center gap-2.5 font-display", className)}>
+      <LogoMark className="h-8 w-8" />
       <span className="flex items-baseline gap-1.5">
         <span
           className={cn(

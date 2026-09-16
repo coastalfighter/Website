@@ -33,12 +33,16 @@
      too light to meet contrast requirements as foreground text on white. */
   --color-brand-ink: #1d4ed8;
 
-  --color-accent-500: #22d3c7;
-  --color-accent-400: #5eead4;
-  /* Same reasoning as brand-ink, for the teal accent used in eyebrow labels. */
-  --color-accent-ink: #0f766e;
+  /* Red, matching the CMC shield's right half — the palette's accent color. */
+  --color-accent-500: #ef4444;
+  --color-accent-400: #f87171;
+  /* Same reasoning as brand-ink, for the red accent used in eyebrow labels. */
+  --color-accent-ink: #b91c1c;
 
-  --color-signal-500: #a78bfa;
+  /* A deep navy — stays in the blue family, used sparingly for decorative
+     variety (a third tone among low-opacity blobs/gradients) rather than
+     introducing an unrelated hue. */
+  --color-signal-500: #1e3a8a;
 
   --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-400) 35%, transparent);
   --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 8px -2px rgb(15 23 42 / 0.06);

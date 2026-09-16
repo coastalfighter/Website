@@ -15,7 +15,7 @@ export function ScrollProgressBar() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-linear-to-r from-brand-500 via-accent-500 to-signal-500"
+      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-linear-to-r from-brand-500 to-accent-500"
     />
   );
 }

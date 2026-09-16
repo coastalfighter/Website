@@ -26,8 +26,10 @@ export function BrandShowcase({ brands, className }: BrandShowcaseProps) {
               height={36}
               className="h-8 w-auto object-contain"
             />
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-accent-400/30 bg-accent-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-accent-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-400 animate-pulse-slow" />
+            {/* Literal green, not the accent token — accent is brand red
+                now, and "Active" needs to read as operational, not down. */}
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-slow" />
               Active
             </span>
           </div>

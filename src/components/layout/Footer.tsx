@@ -114,14 +114,16 @@ export function Footer() {
             &copy; {year} {siteConfig.legalName}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
+            {/* Literal green, not the accent token — accent is brand red now,
+                and "all systems connected" needs to read as good news. */}
             <span className="flex items-center gap-1.5" title="Network status: connected">
               <span className="flex h-2.5 items-end gap-0.5" aria-hidden>
-                <span className="w-0.5 origin-bottom animate-signal-bar bg-accent-400 [animation-delay:0ms]" style={{ height: "40%" }} />
-                <span className="w-0.5 origin-bottom animate-signal-bar bg-accent-400 [animation-delay:150ms]" style={{ height: "70%" }} />
-                <span className="w-0.5 origin-bottom animate-signal-bar bg-accent-400 [animation-delay:300ms]" style={{ height: "100%" }} />
+                <span className="w-0.5 origin-bottom animate-signal-bar bg-emerald-400 [animation-delay:0ms]" style={{ height: "40%" }} />
+                <span className="w-0.5 origin-bottom animate-signal-bar bg-emerald-400 [animation-delay:150ms]" style={{ height: "70%" }} />
+                <span className="w-0.5 origin-bottom animate-signal-bar bg-emerald-400 [animation-delay:300ms]" style={{ height: "100%" }} />
               </span>
-              <SignalBarsIcon className="hidden h-3 w-3 text-accent-400 sm:block" aria-hidden />
-              <span className="text-accent-400">All systems connected</span>
+              <SignalBarsIcon className="hidden h-3 w-3 text-emerald-400 sm:block" aria-hidden />
+              <span className="text-emerald-400">All systems connected</span>
             </span>
             <span>Cerritos, California</span>
           </div>

@@ -46,7 +46,9 @@ export function ContactForm() {
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-accent-400/40 bg-accent-400/10 p-8 text-center"
+        // Deliberately a literal green, not the accent token — accent is
+        // brand red now, and a red "success" box would read as an error.
+        className="rounded-2xl border border-emerald-400/40 bg-emerald-400/10 p-8 text-center"
       >
         <p className="font-display text-xl font-semibold text-paper">Thank you!</p>
         <p className="mt-2 text-sm text-paper/70">

@@ -14,9 +14,10 @@ void main() {
   gl_Position = position;
 }`;
 
-// A slow, brand-tinted nebula of drifting light — adapted from a public-domain
-// "clouds" shader by Matthias Hurrle (@atzedent), retimed and recolored from
-// its original warm palette to CMC's blue/teal/violet brand.
+// The CMC shield, rebuilt as a living background: an animated diagonal
+// divide between brand blue and accent red, with a bright seam where they
+// meet (echoing the shield's white crown) and a fine grain so the fields
+// don't read as flat CSS gradients.
 const FRAGMENT_SOURCE = `#version 300 es
 precision highp float;
 out vec4 O;
@@ -50,34 +51,30 @@ float fbm(vec2 p) {
   return t;
 }
 
-float clouds(vec2 p) {
-  float d = 1., t = .0;
-  for (float i = .0; i < 3.; i++) {
-    float a = d * fbm(i * 10. + p.x * .2 + .2 * (1. + i) * p.y + d + i * i + p);
-    t = mix(t, d, a);
-    d = a;
-    p *= 2. / (i + 1.);
-  }
-  return t;
-}
-
 void main(void) {
-  vec2 uv = (FC - .5 * R) / MN, st = uv * vec2(2, 1);
-  vec3 col = vec3(0);
-  float bg = clouds(vec2(st.x + T * .1, -st.y));
-  uv *= 1. - .3 * (sin(T * .08) * .5 + .5);
+  vec2 uv = (FC - .5 * R) / MN;
 
-  for (float i = 1.; i < 12.; i++) {
-    uv += .1 * cos(i * vec2(.1 + .01 * i, .8) + i * i + T * .12 + .1 * uv.x);
-    vec2 p = uv;
-    float d = length(p);
-    col += .00125 / d * (cos(vec3(2.6, 1.6, 0.4) + i * 0.35) + 1.3);
-    float b = noise(i + p + bg * 1.731);
-    col += .002 * b / length(max(p, vec2(b * p.x * .02, p.y)));
-    col = mix(col, vec3(bg * .05, bg * .15, bg * .24), d);
-  }
+  // A gently animated diagonal seam — the shield's blue/red divide.
+  float d = uv.x - uv.y * 0.35 + sin(uv.y * 2.0 + T * 0.15) * 0.05;
 
-  O = vec4(col, 1);
+  vec3 blue = vec3(0.086, 0.310, 0.816);
+  vec3 red  = vec3(0.780, 0.114, 0.114);
+  float m = smoothstep(-0.5, 0.5, d * 4.0);
+  vec3 col = mix(blue, red, m);
+
+  // A bright, gently pulsing glow along the seam itself.
+  float seam = exp(-abs(d) * 12.0) * (0.75 + 0.25 * sin(T * 1.4));
+  col += vec3(1.0) * seam * 0.85;
+
+  // Fine grain so each field reads as alive, not a flat gradient.
+  float grain = fbm(uv * 2.2 + T * 0.04);
+  col *= 0.86 + 0.16 * grain;
+
+  // Vignette toward the edges, receding into the section's black backdrop.
+  float vig = smoothstep(1.35, 0.15, length(uv));
+  col *= vig;
+
+  O = vec4(col, 1.0);
 }`;
 
 class ShaderRenderer {

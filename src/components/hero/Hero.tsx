@@ -8,6 +8,7 @@ import { useIsWebglAvailable } from "@/lib/useIsWebglAvailable";
 import { CountUp } from "@/components/ui/CountUp";
 import { GradientText } from "@/components/ui/GradientText";
 import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
+import { LogoMark } from "@/components/layout/LogoMark";
 import { ShaderBackground } from "./ShaderBackground";
 import { MagneticCta } from "./MagneticCta";
 import { FloatingIcons } from "@/components/ui/FloatingIcons";
@@ -62,11 +63,13 @@ function AnimatedHeadline() {
 
 function HeroFallbackBackground() {
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
-      <div className="absolute left-1/2 top-1/3 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/25 blur-[120px] animate-pulse-slow" />
-      <div className="absolute right-1/4 bottom-1/4 h-[26rem] w-[26rem] rounded-full bg-accent-500/20 blur-[110px] animate-float" />
-      <div className="absolute left-1/4 bottom-1/3 h-[20rem] w-[20rem] rounded-full bg-signal-500/20 blur-[100px] animate-float [animation-delay:2s]" />
-    </div>
+    <div
+      className="absolute inset-0 overflow-hidden bg-black"
+      style={{
+        backgroundImage:
+          "linear-gradient(115deg, #123B82 0%, #1E6FE0 42%, #ffffff 50%, #E0272A 58%, #7A1414 100%)",
+      }}
+    />
   );
 }
 
@@ -89,6 +92,8 @@ export function Hero() {
   const bgOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
   const contentY = useTransform(scrollYProgress, [0, 0.7], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const markRotate = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const markScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   return (
     <section ref={containerRef} data-dark-band className="relative h-[180svh] w-full">
@@ -108,62 +113,80 @@ export function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black/40" />
         <FloatingIcons seed={1} count={3} tone="light" className="z-[5]" />
 
-        <motion.div
-          style={{ y: contentY, opacity: contentOpacity }}
-          className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center gap-4 px-6 py-24 lg:px-8"
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-300 backdrop-blur"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-400 animate-pulse-slow" />
-            {heroContent.eyebrow}
-          </motion.p>
-
-          <AnimatedHeadline />
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.7 }}
-            className="max-w-xl text-balance text-base leading-relaxed text-white/70 sm:text-lg"
-          >
-            {heroContent.subcopy}
-          </motion.p>
-
+        <div className="relative z-10 mx-auto grid h-full max-w-7xl items-center gap-8 px-6 py-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.15, duration: 0.7 }}
-            className="mt-2 flex flex-wrap items-center gap-4"
+            style={{ y: contentY, opacity: contentOpacity }}
+            className="flex flex-col justify-center gap-4"
           >
-            <MagneticCta href={heroContent.cta.href} variant="primary">
-              {heroContent.cta.label}
-            </MagneticCta>
-            <MagneticCta href={heroContent.secondaryCta.href} variant="onDark">
-              {heroContent.secondaryCta.label}
-            </MagneticCta>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-accent-400/30 bg-accent-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-400 backdrop-blur"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-400 animate-pulse-slow" />
+              {heroContent.eyebrow}
+            </motion.p>
+
+            <AnimatedHeadline />
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.7 }}
+              className="max-w-xl text-balance text-base leading-relaxed text-white/70 sm:text-lg"
+            >
+              {heroContent.subcopy}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.15, duration: 0.7 }}
+              className="mt-2 flex flex-wrap items-center gap-4"
+            >
+              <MagneticCta href={heroContent.cta.href} variant="primary">
+                {heroContent.cta.label}
+              </MagneticCta>
+              <MagneticCta href={heroContent.secondaryCta.href} variant="onDark">
+                {heroContent.secondaryCta.label}
+              </MagneticCta>
+            </motion.div>
+
+            <motion.dl
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3, duration: 0.7 }}
+              className="mt-4 flex flex-wrap gap-x-12 gap-y-4 border-t border-white/15 pt-6"
+            >
+              {heroContent.stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd className="font-display text-3xl font-semibold text-white sm:text-4xl">
+                    <CountUp value={stat.value} suffix={stat.suffix} />
+                  </dd>
+                  <p className="mt-1 text-sm text-white/60">{stat.label}</p>
+                </div>
+              ))}
+            </motion.dl>
           </motion.div>
 
-          <motion.dl
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.3, duration: 0.7 }}
-            className="mt-4 flex flex-wrap gap-x-12 gap-y-4 border-t border-white/15 pt-6"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="relative hidden items-center justify-center lg:flex"
           >
-            {heroContent.stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-display text-3xl font-semibold text-white sm:text-4xl">
-                  <CountUp value={stat.value} suffix={stat.suffix} />
-                </dd>
-                <p className="mt-1 text-sm text-white/60">{stat.label}</p>
-              </div>
-            ))}
-          </motion.dl>
-        </motion.div>
+            <div className="absolute h-72 w-72 rounded-full bg-brand-500/25 blur-[100px]" />
+            <div className="absolute h-56 w-56 rounded-full bg-accent-500/20 blur-[90px]" />
+            <motion.div
+              style={{ rotate: markRotate, scale: markScale }}
+              className="relative animate-float"
+            >
+              <LogoMark className="h-64 w-64 drop-shadow-2xl xl:h-80 xl:w-80" />
+            </motion.div>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}

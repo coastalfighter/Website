@@ -51,7 +51,7 @@ export function PageHeader({
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-14 lg:px-8">
         {breadcrumbs ? <Breadcrumbs items={breadcrumbs} className="mb-4" /> : null}
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-teal-300">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-400">
           {eyebrow}
         </p>
         <h1 className="max-w-3xl text-balance font-display text-4xl font-medium leading-tight tracking-tight text-white sm:text-5xl">
