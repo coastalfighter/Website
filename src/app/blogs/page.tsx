@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { GlowField } from "@/components/ui/GlowField";
 import { blogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
@@ -24,15 +25,13 @@ export default function BlogIndexPage() {
         }}
       />
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
-              <Reveal key={post.slug} delay={(i % 3) * 0.06}>
-                <Link
-                  href={`/blogs/${post.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-line/80 bg-surface/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40"
-                >
+              <TiltCard key={post.slug} delay={(i % 3) * 0.06} className="p-0">
+                <Link href={`/blogs/${post.slug}`} className="flex h-full flex-col p-6">
                   <time className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                     {new Date(post.date).toLocaleDateString("en-US", {
                       month: "short",
@@ -51,7 +50,7 @@ export default function BlogIndexPage() {
                     </span>
                   </span>
                 </Link>
-              </Reveal>
+              </TiltCard>
             ))}
           </div>
         </div>

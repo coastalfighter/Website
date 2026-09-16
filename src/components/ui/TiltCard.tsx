@@ -61,7 +61,7 @@ export function TiltCard({ children, className, delay = 0 }: TiltCardProps) {
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{ rotateX, rotateY, transformPerspective: 800, transformStyle: "preserve-3d" }}
       className={cn(
-        "group relative overflow-hidden rounded-2xl border border-line/80 bg-surface/60 p-8 transition-colors duration-300 hover:border-brand-400/50",
+        "group relative h-full overflow-hidden rounded-2xl border border-line/80 bg-surface/60 p-8 transition-colors duration-300 hover:border-brand-400/50",
         className
       )}
     >
@@ -70,7 +70,7 @@ export function TiltCard({ children, className, delay = 0 }: TiltCardProps) {
         className="pointer-events-none absolute -inset-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: glowBackground }}
       />
-      <div className="relative" style={{ transform: "translateZ(24px)" }}>
+      <div className="relative h-full" style={{ transform: "translateZ(24px)" }}>
         {children}
       </div>
     </motion.div>

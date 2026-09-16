@@ -4,8 +4,9 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { CountUp } from "@/components/ui/CountUp";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { GlowField } from "@/components/ui/GlowField";
 import { MagneticCta } from "@/components/hero/MagneticCta";
-import { Reveal } from "@/components/ui/Reveal";
 import { whatDrivesUs, leadershipTeam, provenResults } from "@/data/about";
 import { pressLogos } from "@/data/site";
 
@@ -24,7 +25,8 @@ export default function AboutPage() {
         image={{ src: "/images/photos/img-2281.jpeg", alt: "The CMC Group team celebrating together" }}
       />
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <SectionHeading eyebrow="What Defines Us" heading={whatDrivesUs.goalsHeading} />
@@ -39,23 +41,23 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
+            <TiltCard delay={0}>
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Mission
               </h3>
               <p className="mt-3 text-base leading-relaxed text-paper/75">
                 {whatDrivesUs.mission}
               </p>
-            </div>
-            <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
+            </TiltCard>
+            <TiltCard delay={0.06}>
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Vision
               </h3>
               <p className="mt-3 text-base leading-relaxed text-paper/75">
                 {whatDrivesUs.vision}
               </p>
-            </div>
-            <div className="rounded-2xl border border-line/80 bg-surface/50 p-8">
+            </TiltCard>
+            <TiltCard delay={0.12}>
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-accent-ink">
                 Our Values
               </h3>
@@ -69,7 +71,7 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -84,21 +86,18 @@ export default function AboutPage() {
           </div>
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {leadershipTeam.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 5) * 0.05} className="group text-center">
-                <AvatarInitials
-                  name={member.name}
-                  seed={i}
-                  className="transition-transform duration-300 group-hover:scale-105"
-                />
+              <TiltCard key={member.name} delay={(i % 5) * 0.05} className="text-center">
+                <AvatarInitials name={member.name} seed={i} />
                 <p className="mt-3 font-semibold text-paper">{member.name}</p>
                 <p className="text-xs text-paper/55">{member.title}</p>
-              </Reveal>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
             eyebrow="Proven Results"
@@ -108,16 +107,12 @@ export default function AboutPage() {
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-3">
             {provenResults.map((result, i) => (
-              <Reveal
-                key={result.label}
-                delay={i * 0.08}
-                className="rounded-2xl border border-line/80 bg-surface/40 p-10 text-center"
-              >
+              <TiltCard key={result.label} delay={i * 0.08} className="text-center">
                 <p className="font-display text-5xl font-semibold text-paper">
                   <CountUp value={result.value} suffix={result.suffix} />
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-paper/60">{result.label}</p>
-              </Reveal>
+              </TiltCard>
             ))}
           </div>
         </div>

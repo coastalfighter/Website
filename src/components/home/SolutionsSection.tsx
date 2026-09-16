@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
+import { GlowField } from "@/components/ui/GlowField";
 import { solutions } from "@/data/home";
 
 const ICONS: Record<string, React.ReactNode> = {
@@ -26,7 +27,8 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export function SolutionsSection() {
   return (
-    <section className="bg-ink py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+      <GlowField />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="Our Solutions"

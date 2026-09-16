@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { GlowField } from "@/components/ui/GlowField";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -18,7 +19,8 @@ export default function ContactPage() {
         image={{ src: "/images/photos/mes02829.webp", alt: "CMC Group team members in conversation" }}
       />
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-[1fr_1.1fr] lg:px-8">
           <div>
             <h2 className="font-display text-2xl font-semibold text-paper">Get in touch</h2>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { GlowField } from "@/components/ui/GlowField";
 import { getBlogPost } from "@/data/blog";
 
 const FEATURED_SLUGS = [
@@ -13,7 +14,8 @@ export function BlogPreview() {
   const posts = FEATURED_SLUGS.map(getBlogPost).filter((post) => post !== undefined);
 
   return (
-    <section className="bg-ink-2 py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+      <GlowField />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="From the Blog" heading="Field-tested lessons on sales and leadership" />
@@ -28,11 +30,8 @@ export function BlogPreview() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {posts.map((post, i) => (
-            <Reveal key={post.slug} delay={i * 0.08}>
-              <Link
-                href={`/blogs/${post.slug}`}
-                className="group flex h-full flex-col rounded-2xl border border-line/80 bg-surface/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40"
-              >
+            <TiltCard key={post.slug} delay={i * 0.08} className="p-0">
+              <Link href={`/blogs/${post.slug}`} className="flex h-full flex-col p-6">
                 <time className="text-xs font-semibold uppercase tracking-wider text-accent-ink">
                   {new Date(post.date).toLocaleDateString("en-US", {
                     month: "short",
@@ -51,7 +50,7 @@ export function BlogPreview() {
                   </span>
                 </span>
               </Link>
-            </Reveal>
+            </TiltCard>
           ))}
         </div>
       </div>
