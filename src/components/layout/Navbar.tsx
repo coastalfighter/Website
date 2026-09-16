@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { navLinks, siteConfig } from "@/data/site";
+import { navLinks, utilityLinks, siteConfig } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
 
@@ -90,7 +90,19 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-5 md:flex">
+          {utilityLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                light ? "text-white/60 hover:text-white/90" : "text-paper/55 hover:text-paper/80"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
           <Link
             href="/contact"
             className="relative overflow-hidden rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-300 hover:scale-105 hover:bg-brand-400 active:scale-95"
@@ -137,6 +149,16 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className="rounded-lg px-3 py-3 text-base font-medium text-paper/90 hover:bg-surface"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              {utilityLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-paper/60 hover:bg-surface"
                 >
                   {link.label}
                 </Link>

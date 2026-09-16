@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
 import { FloatingIcons } from "@/components/ui/FloatingIcons";
+import { FeaturedPostCard } from "@/components/blog/FeaturedPostCard";
 import { blogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function BlogIndexPage() {
   const posts = [...blogPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const [featured, ...rest] = posts;
 
   return (
     <>
@@ -24,14 +26,17 @@ export default function BlogIndexPage() {
           src: "/images/photos/section-2.jpg",
           alt: "A \"Success — go get it\" chalkboard from the CMC office",
         }}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
       />
 
       <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
         <GlowField />
         <FloatingIcons seed={10} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, i) => (
+          {featured ? <FeaturedPostCard post={featured} /> : null}
+
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {rest.map((post, i) => (
               <TiltCard key={post.slug} delay={(i % 3) * 0.06} className="p-0">
                 <Link href={`/blogs/${post.slug}`} className="flex h-full flex-col p-6">
                   <time className="text-xs font-semibold uppercase tracking-wider text-accent-ink">

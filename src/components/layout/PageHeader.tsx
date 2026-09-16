@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
+import { Breadcrumbs } from "./Breadcrumbs";
 
 interface PageHeaderProps {
   eyebrow: string;
@@ -9,6 +10,8 @@ interface PageHeaderProps {
   image?: { src: string; alt: string };
   /** A shorter band, for pages with less to say up top (e.g. a blog post). */
   compact?: boolean;
+  /** Wayfinding trail above the eyebrow, e.g. [{ label: "Home", href: "/" }, { label: "Blog" }]. */
+  breadcrumbs?: readonly { label: string; href?: string }[];
 }
 
 /**
@@ -19,11 +22,18 @@ interface PageHeaderProps {
  * "not scrolled yet" means "sitting on a dark background", which only holds
  * if every page actually opens on one of these (or the WebGL hero).
  */
-export function PageHeader({ eyebrow, heading, body, image, compact = false }: PageHeaderProps) {
+export function PageHeader({
+  eyebrow,
+  heading,
+  body,
+  image,
+  compact = false,
+  breadcrumbs,
+}: PageHeaderProps) {
   return (
     <div
       data-dark-band
-      className={`relative flex ${compact ? "h-[32vh] min-h-[280px]" : "h-[52vh] min-h-[420px]"} items-end overflow-hidden bg-black pt-24`}
+      className={`relative flex ${compact ? "h-[36vh] min-h-[320px]" : "h-[52vh] min-h-[420px]"} items-end overflow-hidden bg-black pt-24`}
     >
       {image ? (
         <Image
@@ -40,6 +50,7 @@ export function PageHeader({ eyebrow, heading, body, image, compact = false }: P
       <NoiseOverlay />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-14 lg:px-8">
+        {breadcrumbs ? <Breadcrumbs items={breadcrumbs} className="mb-4" /> : null}
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-teal-300">
           {eyebrow}
         </p>

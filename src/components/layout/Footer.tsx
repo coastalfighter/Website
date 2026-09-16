@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navLinks, siteConfig } from "@/data/site";
+import { navLinks, utilityLinks, siteConfig } from "@/data/site";
 import { Logo } from "./Logo";
 import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { SignalBarsIcon } from "@/components/ui/TelecomIcons";
@@ -71,6 +71,16 @@ export function Footer() {
                   Contact Us
                 </Link>
               </li>
+              {utilityLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

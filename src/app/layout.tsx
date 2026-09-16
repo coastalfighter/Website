@@ -4,6 +4,7 @@ import { siteConfig } from "@/data/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgressBar } from "@/components/layout/ScrollProgressBar";
+import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import "./globals.css";
 
 const inter = Inter({
@@ -53,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-ink font-sans antialiased">
+      <body className="min-h-screen bg-ink pb-20 font-sans antialiased sm:pb-0">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-brand-500 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
@@ -64,6 +65,7 @@ export default function RootLayout({
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
+        <StickyMobileCta />
       </body>
     </html>
   );

@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
-import { CountUp } from "@/components/ui/CountUp";
 import { TiltCard } from "@/components/ui/TiltCard";
+import { StatsBand } from "@/components/ui/StatsBand";
+import { PhotoMosaic } from "@/components/ui/PhotoMosaic";
+import { PressLogos } from "@/components/ui/PressLogos";
 import { GlowField } from "@/components/ui/GlowField";
 import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { MagneticCta } from "@/components/hero/MagneticCta";
+import { SignalBarsIcon, HandsetIcon, NetworkNodeIcon } from "@/components/ui/TelecomIcons";
 import { whatDrivesUs, leadershipTeam, provenResults } from "@/data/about";
-import { pressLogos } from "@/data/site";
+
+const galleryPhotos = [
+  { src: "/images/photos/img-1845.webp", alt: "CMC Group representatives at a team event" },
+  { src: "/images/photos/mes02799.webp", alt: "A CMC Group field representative at work" },
+  { src: "/images/photos/img-2282.jpeg", alt: "CMC Group team members collaborating" },
+  { src: "/images/photos/img-2283.jpeg", alt: "The CMC Group team celebrating a milestone" },
+];
+
+const resultIcons = [SignalBarsIcon, HandsetIcon, NetworkNodeIcon];
 
 export const metadata: Metadata = {
   title: "About CMC",
@@ -24,6 +34,7 @@ export default function AboutPage() {
         heading="Professionalism meets performance"
         body={whatDrivesUs.goalsBody}
         image={{ src: "/images/photos/img-2281.jpeg", alt: "The CMC Group team celebrating together" }}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About CMC" }]}
       />
 
       <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
@@ -77,13 +88,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink-2 py-20 sm:py-28">
+        <GlowField />
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Behind the Scenes" heading="Life on a CMC field team" align="center" className="mx-auto" />
+          <PhotoMosaic photos={galleryPhotos} className="mt-12" />
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
         <GlowField />
         <FloatingIcons seed={8} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading eyebrow="Leadership Team" heading="The people driving CMC forward" />
-            <MagneticCta href="/contact" variant="secondary">
+            <MagneticCta href="/careers" variant="secondary">
               Join Our Team
             </MagneticCta>
           </div>
@@ -99,7 +118,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
         <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
@@ -108,38 +127,19 @@ export default function AboutPage() {
             align="center"
             className="mx-auto"
           />
-          <div className="mt-16 grid gap-6 sm:grid-cols-3">
-            {provenResults.map((result, i) => (
-              <TiltCard key={result.label} delay={i * 0.08} className="text-center">
-                <p className="font-display text-5xl font-semibold text-paper">
-                  <CountUp value={result.value} suffix={result.suffix} />
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-paper/60">{result.label}</p>
-              </TiltCard>
-            ))}
-          </div>
+          <StatsBand
+            className="mt-16"
+            stats={provenResults.map((result, i) => {
+              const Icon = resultIcons[i % resultIcons.length] ?? SignalBarsIcon;
+              return { icon: <Icon className="h-6 w-6" />, value: result.value, suffix: result.suffix, label: result.label };
+            })}
+          />
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-line/70 bg-ink-2 py-16">
+      <section className="relative overflow-hidden border-t border-line/70 bg-ink py-16">
         <GlowField />
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/60">
-            Trusted by industry leaders
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-            {pressLogos.map((press) => (
-              <Image
-                key={press.name}
-                src={press.src}
-                alt={press.name}
-                width={110}
-                height={32}
-                className="h-6 w-auto object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-90 hover:grayscale-0"
-              />
-            ))}
-          </div>
-        </div>
+        <PressLogos />
       </section>
     </>
   );

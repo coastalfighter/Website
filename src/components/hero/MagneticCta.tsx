@@ -62,7 +62,12 @@ export function MagneticCta({
         <span className="relative z-10">{children}</span>
         <motion.span
           aria-hidden
-          className="relative z-10 inline-block"
+          className={cn(
+            "relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs",
+            variant === "primary" && "border-ink/20",
+            variant === "secondary" && "border-line/80",
+            variant === "onDark" && "border-white/25"
+          )}
           initial={{ x: 0 }}
           whileHover={{ x: 4 }}
         >

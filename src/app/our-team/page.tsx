@@ -4,9 +4,9 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
-import { FloatingIcons } from "@/components/ui/FloatingIcons";
+import { MagneticCta } from "@/components/hero/MagneticCta";
 import { leadershipTeam } from "@/data/about";
-import { teamMission, serviceAreas, teamPartners, programTiers, teamQuote } from "@/data/ourTeam";
+import { teamMission, serviceAreas, teamPartners, teamQuote } from "@/data/ourTeam";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -24,6 +24,7 @@ export default function OurTeamPage() {
           src: "/images/photos/mes02960.webp",
           alt: "CMC Group leadership reviewing team performance",
         }}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Our Team" }]}
       />
 
       <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
@@ -57,25 +58,18 @@ export default function OurTeamPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-20 sm:py-28">
         <GlowField />
-        <FloatingIcons seed={9} count={4} />
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="D2D U: Training Tomorrow's Leaders"
-            heading="Your path to leadership starts here"
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {programTiers.map((tier, i) => (
-              <TiltCard key={tier.title} delay={i * 0.08}>
-                <span className="font-display text-sm font-semibold text-accent-ink">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-4 font-display text-lg font-semibold text-paper">{tier.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper/60">{tier.description}</p>
-              </TiltCard>
-            ))}
-          </div>
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-6 text-center lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
+            D2D U: Training Tomorrow&apos;s Leaders
+          </p>
+          <h2 className="text-balance font-display text-2xl font-medium text-paper sm:text-3xl">
+            Every leader here started on the doors — see the path.
+          </h2>
+          <MagneticCta href="/careers" variant="secondary">
+            View Careers &amp; Training
+          </MagneticCta>
         </div>
       </section>
 
