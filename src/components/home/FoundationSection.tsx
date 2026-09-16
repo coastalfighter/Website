@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { foundation, teamGrowth } from "@/data/home";
 
 export function FoundationSection() {
   return (
     <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
       <GlowField />
+      <FloatingIcons seed={3} count={3} />
       <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
         <div className="relative aspect-4/5 overflow-hidden rounded-2xl border border-line/70">
           <Image

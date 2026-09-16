@@ -10,6 +10,7 @@ import { GradientText } from "@/components/ui/GradientText";
 import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import { ShaderBackground } from "./ShaderBackground";
 import { MagneticCta } from "./MagneticCta";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 
 const wordVariants = {
   hidden: { opacity: 0, y: 48, rotateX: 65 },
@@ -83,7 +84,11 @@ export function Hero() {
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative h-dvh min-h-[640px] w-full overflow-hidden bg-black">
+    <section
+      ref={sectionRef}
+      data-dark-band
+      className="relative h-dvh min-h-[640px] w-full overflow-hidden bg-black"
+    >
       <motion.div className="absolute inset-0" style={{ y: bgY, opacity: bgOpacity }}>
         {canRenderShader ? (
           <ShaderBackground reducedMotion={reducedMotion} className="h-full w-full" />
@@ -94,6 +99,7 @@ export function Hero() {
 
       <NoiseOverlay />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black/40" />
+      <FloatingIcons seed={1} count={3} tone="light" className="z-[5]" />
 
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center gap-4 px-6 py-24 lg:px-8">
         <motion.p

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { GlowField } from "@/components/ui/GlowField";
 import { blogPosts, getBlogPost } from "@/data/blog";
 
 interface BlogPostPageProps {
@@ -35,8 +36,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   });
 
   return (
-    <article className="bg-ink pb-24 sm:pb-32">
+    <article className="relative overflow-hidden bg-ink pb-24 sm:pb-32">
       <PageHeader eyebrow={formattedDate} heading={post.title} compact />
+      <GlowField />
 
       <div className="mx-auto max-w-3xl px-6 pt-14 lg:px-8">
         <Link

@@ -22,6 +22,7 @@ interface PageHeaderProps {
 export function PageHeader({ eyebrow, heading, body, image, compact = false }: PageHeaderProps) {
   return (
     <div
+      data-dark-band
       className={`relative flex ${compact ? "h-[32vh] min-h-[280px]" : "h-[52vh] min-h-[420px]"} items-end overflow-hidden bg-black pt-24`}
     >
       {image ? (

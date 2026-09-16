@@ -3,18 +3,25 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  /* A "digital readout" mono, used for stat counters and signal-style UI
+     bits — the one deliberately telecom/network-equipment-flavored font
+     choice, everything else stays on the clean sans/display pair. */
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* A bright, professional light theme. "ink" and "paper" keep their names
-     from the original dark theme (ink = section background, paper = the
+  /* A bright theme with a strong blue undertone throughout — "ink"/"ink-2"
+     are pale blue rather than pure white, and every section additionally
+     carries a .gradient-wash layer (see below) for real gradient depth, not
+     just a flat tinted color. "ink" and "paper" keep their names from the
+     original dark theme (ink = section background, paper = the
      text/foreground color that sits on it) so components didn't need to
      change — only these token values did. Hero and PageHeader are the two
      intentional exceptions: they stay dark bands by using literal colors
      (bg-black, text-white) instead of these tokens. */
-  --color-ink: #ffffff;
-  --color-ink-2: #f4f6fa;
-  --color-surface: #ffffff;
-  --color-surface-2: #eef1f6;
-  --color-line: #e3e7ee;
+  --color-ink: #eef4ff;
+  --color-ink-2: #e2ecfe;
+  --color-surface: #f7faff;
+  --color-surface-2: #e9f1fe;
+  --color-line: #cddcf5;
 
   --color-paper: #0f172a;
   --color-paper-dim: #475467;
@@ -39,6 +46,8 @@
   --animate-marquee: marquee 32s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+  --animate-signal-bar: signal-bar 1.2s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -63,6 +72,34 @@
       opacity: 0.4;
     }
     50% {
+      opacity: 1;
+    }
+  }
+  @keyframes drift {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(14px, -18px) rotate(4deg);
+    }
+    50% {
+      transform: translate(-6px, -32px) rotate(-3deg);
+    }
+    75% {
+      transform: translate(-16px, -10px) rotate(2deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  @keyframes signal-bar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
       opacity: 1;
     }
   }
@@ -110,6 +147,41 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+/**
+ * The site's "gradient, major-blue" base. Layer this on any
+ * `relative overflow-hidden` section (it sits behind content via -z-10) —
+ * it doesn't replace the section's bg-ink/bg-ink-2 color, it adds real
+ * gradient depth on top of it so the whole page reads as one blue field
+ * rather than flat white panels.
+ */
+.gradient-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      120% 90% at 12% -10%,
+      color-mix(in oklab, var(--color-brand-500) 22%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 80% at 100% 10%,
+      color-mix(in oklab, var(--color-brand-400) 16%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      80% 70% at 20% 115%,
+      color-mix(in oklab, var(--color-accent-500) 12%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-brand-500) 5%, transparent),
+      transparent 40%
+    );
 }
 
 .noise-overlay {

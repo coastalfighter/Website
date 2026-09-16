@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks, siteConfig } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
+
+const NAV_HEIGHT = 72; // matches h-18
 
 function NavLink({ href, label, light }: { href: string; label: string; light: boolean }) {
   return (
@@ -23,20 +26,42 @@ function NavLink({ href, label, light }: { href: string; label: string; light: b
 }
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Every page opens on a dark band (the WebGL hero on "/", a photo
-  // PageHeader everywhere else), so "not scrolled yet" reliably means
-  // "sitting on a dark background" — that's what drives the light/dark swap.
+  // Every page opens on a dark band (the WebGL hero on "/", a photo/plain
+  // PageHeader everywhere else, each marked with data-dark-band), so "not
+  // scrolled past it yet" reliably means "sitting on a dark background" —
+  // that's what drives the light/dark swap. We measure the actual band
+  // height per page rather than guessing a fixed pixel offset, since a
+  // compact PageHeader and the full-height hero are very different sizes.
   const light = !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    let darkBandHeight = 0;
+
+    const measure = () => {
+      const band = document.querySelector<HTMLElement>("[data-dark-band]");
+      darkBandHeight = band?.offsetHeight ?? 0;
+    };
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > Math.max(darkBandHeight - NAV_HEIGHT, 12));
+    };
+
+    measure();
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+    };
+    // Re-measure and re-evaluate whenever the route changes, since the App
+    // Router swaps page content without remounting this shared layout.
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";

@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { CountUp } from "@/components/ui/CountUp";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { MagneticCta } from "@/components/hero/MagneticCta";
 import { whoWeAre, processPillars, missionOfferings, expertServices } from "@/data/whatWeDo";
 
@@ -37,7 +38,8 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
-      <section className="bg-ink-2 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
             eyebrow="Proven Process"
@@ -61,7 +63,8 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
             eyebrow="Why Choose Us"
@@ -86,6 +89,7 @@ export default function WhatWeDoPage() {
 
       <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
         <GlowField />
+        <FloatingIcons seed={7} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
             eyebrow="Expert Services"
@@ -104,7 +108,8 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
-      <section className="bg-ink py-24">
+      <section className="relative overflow-hidden bg-ink py-24">
+        <GlowField />
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 text-center lg:px-8">
           <h2 className="text-balance font-display text-3xl font-medium text-paper sm:text-4xl">
             Let&apos;s build your market plan.

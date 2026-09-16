@@ -1,34 +1,21 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
+import { CellTowerIcon, HandsetIcon, NetworkNodeIcon } from "@/components/ui/TelecomIcons";
 import { solutions } from "@/data/home";
 
 const ICONS: Record<string, React.ReactNode> = {
-  target: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth={1.5}>
-      <circle cx="12" cy="12" r="8" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="12" cy="12" r="0.5" fill="currentColor" />
-    </svg>
-  ),
-  map: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth={1.5}>
-      <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" strokeLinejoin="round" />
-      <path d="M9 4v14M15 6v14" />
-    </svg>
-  ),
-  handshake: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth={1.5}>
-      <path d="m3 11 5-5 4 2 4-2 5 5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M7 13l3 3 2-2 2 2 3-3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
+  target: <CellTowerIcon className="h-6 w-6" />,
+  map: <NetworkNodeIcon className="h-6 w-6" />,
+  handshake: <HandsetIcon className="h-6 w-6" />,
 };
 
 export function SolutionsSection() {
   return (
     <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
       <GlowField />
+      <FloatingIcons seed={2} count={3} />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="Our Solutions"

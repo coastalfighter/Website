@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { getBlogPost } from "@/data/blog";
 
 const FEATURED_SLUGS = [
@@ -16,6 +17,7 @@ export function BlogPreview() {
   return (
     <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
       <GlowField />
+      <FloatingIcons seed={5} count={3} />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="From the Blog" heading="Field-tested lessons on sales and leadership" />

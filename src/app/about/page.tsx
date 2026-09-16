@@ -6,6 +6,7 @@ import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { CountUp } from "@/components/ui/CountUp";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { MagneticCta } from "@/components/hero/MagneticCta";
 import { whatDrivesUs, leadershipTeam, provenResults } from "@/data/about";
 import { pressLogos } from "@/data/site";
@@ -76,7 +77,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-ink-2 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+        <GlowField />
+        <FloatingIcons seed={8} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading eyebrow="Leadership Team" heading="The people driving CMC forward" />
@@ -118,7 +121,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-line/70 bg-ink-2 py-16">
+      <section className="relative overflow-hidden border-t border-line/70 bg-ink-2 py-16">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/60">
             Trusted by industry leaders

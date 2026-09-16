@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { blogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function BlogIndexPage() {
 
       <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
         <GlowField />
+        <FloatingIcons seed={10} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (

@@ -1,11 +1,13 @@
 import Image from "next/image";
+import { GlowField } from "@/components/ui/GlowField";
 import { partners } from "@/data/site";
 
 export function PartnersMarquee() {
   const track = [...partners, ...partners];
 
   return (
-    <section className="border-y border-line/70 bg-ink-2 py-10">
+    <section className="relative overflow-hidden border-y border-line/70 bg-ink-2 py-10">
+      <GlowField />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-paper/60">
           Authorized dealer &amp; sales partner for

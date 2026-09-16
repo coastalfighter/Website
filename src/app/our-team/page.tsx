@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AvatarInitials } from "@/components/ui/AvatarInitials";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { GlowField } from "@/components/ui/GlowField";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { leadershipTeam } from "@/data/about";
 import { teamMission, serviceAreas, teamPartners, programTiers, teamQuote } from "@/data/ourTeam";
 
@@ -40,7 +41,8 @@ export default function OurTeamPage() {
         </div>
       </section>
 
-      <section className="bg-ink-2 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
+        <GlowField />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading eyebrow="Leadership" heading="Built for growth" align="center" className="mx-auto" />
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
@@ -55,7 +57,9 @@ export default function OurTeamPage() {
         </div>
       </section>
 
-      <section className="bg-ink py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
+        <GlowField />
+        <FloatingIcons seed={9} count={4} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeading
             eyebrow="D2D U: Training Tomorrow's Leaders"
@@ -90,7 +94,8 @@ export default function OurTeamPage() {
         </div>
       </section>
 
-      <section className="bg-ink py-24">
+      <section className="relative overflow-hidden bg-ink py-24">
+        <GlowField />
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
           <p className="text-balance font-display text-2xl italic leading-snug text-paper/85 sm:text-3xl">
             &ldquo;{teamQuote.text}&rdquo;
