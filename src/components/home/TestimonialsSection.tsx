@@ -1,22 +1,37 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
-import { GlowField } from "@/components/ui/GlowField";
-import { FloatingIcons } from "@/components/ui/FloatingIcons";
-import { testimonials } from "@/data/home";
+import { Card } from "@/components/ui/Card";
+import { testimonials } from "@/data/site";
+
+function initialsFor(name: string): string {
+  return name.split(" ").filter(Boolean).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
+}
 
 export function TestimonialsSection() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
-      <GlowField />
-      <FloatingIcons seed={4} count={4} />
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="Client Satisfaction"
           heading="Trusted by the customers our partners serve"
           align="center"
           className="mx-auto"
         />
-        <TestimonialCarousel testimonials={testimonials} className="mt-16" />
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          {testimonials.map((testimonial, i) => (
+            <Card key={testimonial.name} delay={i * 0.06}>
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-50 text-sm font-semibold text-brand-600">
+                  {initialsFor(testimonial.name)}
+                </span>
+                <div>
+                  <p className="font-semibold text-text">{testimonial.name}</p>
+                  <p className="text-xs text-text-dim">CMC customer</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-text-dim">{testimonial.detail}</p>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   );

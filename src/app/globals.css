@@ -2,109 +2,38 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  /* A "digital readout" mono, used for stat counters and signal-style UI
-     bits — the one deliberately telecom/network-equipment-flavored font
-     choice, everything else stays on the clean sans/display pair. */
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* A bright theme with a strong blue undertone throughout — "ink"/"ink-2"
-     are pale blue rather than pure white, and every section additionally
-     carries a .gradient-wash layer (see below) for real gradient depth, not
-     just a flat tinted color. "ink" and "paper" keep their names from the
-     original dark theme (ink = section background, paper = the
-     text/foreground color that sits on it) so components didn't need to
-     change — only these token values did. Hero and PageHeader are the two
-     intentional exceptions: they stay dark bands by using literal colors
-     (bg-black, text-white) instead of these tokens. */
-  --color-ink: #eef4ff;
-  --color-ink-2: #e2ecfe;
-  --color-surface: #f7faff;
-  --color-surface-2: #e9f1fe;
-  --color-line: #cddcf5;
+  /* Neutral base — a plain light site, not a tinted "gradient wash." */
+  --color-ink: #ffffff;
+  --color-ink-2: #f8fafc;
+  --color-line: #e2e8f0;
 
-  --color-paper: #0f172a;
-  --color-paper-dim: #475467;
+  --color-text: #0f172a;
+  --color-text-dim: #475569;
 
-  --color-brand-500: #3b82f6;
-  --color-brand-400: #60a5fa;
-  --color-brand-300: #93c5fd;
-  /* A darker blue for text/links on the light background — brand-300/400 are
-     too light to meet contrast requirements as foreground text on white. */
-  --color-brand-ink: #1d4ed8;
+  /* Blue and red, taken directly from the CMC shield. Blue carries the
+     site (links, CTAs, focus states); red is used sparingly as a single
+     accent, not blended into every surface. */
+  --color-brand-600: #1a56c4;
+  --color-brand-500: #1e6fe0;
+  --color-brand-400: #4f8fe8;
+  --color-brand-50: #eef4fd;
 
-  /* Red, matching the CMC shield's right half — the palette's accent color. */
-  --color-accent-500: #ef4444;
-  --color-accent-400: #f87171;
-  /* Same reasoning as brand-ink, for the red accent used in eyebrow labels. */
-  --color-accent-ink: #b91c1c;
+  --color-accent-600: #b91c1c;
+  --color-accent-500: #e0272a;
 
-  /* A deep navy — stays in the blue family, used sparingly for decorative
-     variety (a third tone among low-opacity blobs/gradients) rather than
-     introducing an unrelated hue. */
-  --color-signal-500: #1e3a8a;
-
-  --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-400) 35%, transparent);
   --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 8px -2px rgb(15 23 42 / 0.06);
 
-  --animate-marquee: marquee 32s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
-  --animate-drift: drift 14s ease-in-out infinite;
-  --animate-signal-bar: signal-bar 1.2s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 
-  @keyframes marquee {
+  @keyframes fade-up {
     from {
-      transform: translateX(0);
+      opacity: 0;
+      transform: translateY(16px);
     }
     to {
-      transform: translateX(-50%);
-    }
-  }
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-14px);
-    }
-  }
-  @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 0.4;
-    }
-    50% {
       opacity: 1;
-    }
-  }
-  @keyframes drift {
-    0% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(14px, -18px) rotate(4deg);
-    }
-    50% {
-      transform: translate(-6px, -32px) rotate(-3deg);
-    }
-    75% {
-      transform: translate(-16px, -10px) rotate(2deg);
-    }
-    100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-  }
-  @keyframes signal-bar {
-    0%,
-    100% {
-      transform: scaleY(0.4);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scaleY(1);
-      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -112,15 +41,6 @@
 html {
   color-scheme: light;
   scroll-behavior: smooth;
-}
-
-@keyframes kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.12);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,56 +59,16 @@ html {
 
 body {
   background: var(--color-ink);
-  color: var(--color-paper);
+  color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
   background: var(--color-brand-500);
-  color: var(--color-ink);
+  color: white;
 }
 
 .text-balance {
   text-wrap: balance;
-}
-
-/**
- * The site's "gradient, major-blue" base. Layer this on any
- * `relative overflow-hidden` section (it sits behind content via -z-10) —
- * it doesn't replace the section's bg-ink/bg-ink-2 color, it adds real
- * gradient depth on top of it so the whole page reads as one blue field
- * rather than flat white panels.
- */
-.gradient-wash {
-  position: absolute;
-  inset: 0;
-  z-index: -10;
-  pointer-events: none;
-  background-image:
-    radial-gradient(
-      120% 90% at 12% -10%,
-      color-mix(in oklab, var(--color-brand-500) 22%, transparent),
-      transparent 55%
-    ),
-    radial-gradient(
-      90% 80% at 100% 10%,
-      color-mix(in oklab, var(--color-brand-400) 16%, transparent),
-      transparent 60%
-    ),
-    radial-gradient(
-      80% 70% at 20% 115%,
-      color-mix(in oklab, var(--color-accent-500) 12%, transparent),
-      transparent 60%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--color-brand-500) 5%, transparent),
-      transparent 40%
-    );
-}
-
-.noise-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  background-size: 160px 160px;
 }

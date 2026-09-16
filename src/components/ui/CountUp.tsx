@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView } from "framer-motion";
-import { cn } from "@/lib/cn";
 
 interface CountUpProps {
   value: number;
@@ -11,7 +10,7 @@ interface CountUpProps {
   className?: string;
 }
 
-export function CountUp({ value, suffix = "", duration = 1.6, className }: CountUpProps) {
+export function CountUp({ value, suffix = "", duration = 1.2, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const [display, setDisplay] = useState(0);
@@ -27,7 +26,7 @@ export function CountUp({ value, suffix = "", duration = 1.6, className }: Count
   }, [inView, value, duration]);
 
   return (
-    <span ref={ref} className={cn("font-mono tabular-nums", className)}>
+    <span ref={ref} className={className}>
       {display}
       {suffix}
     </span>

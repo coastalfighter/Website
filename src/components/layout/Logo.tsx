@@ -1,31 +1,20 @@
 import { cn } from "@/lib/cn";
 import { LogoMark } from "./LogoMark";
 
-interface LogoProps {
-  /** Use over the dark hero/page-header bands, where paper/ink text would vanish. */
-  light?: boolean;
-  className?: string;
-}
-
-/** The shield mark plus the "CMC Group" wordmark — the shield's blue/red/white
- * stays fixed regardless of theme; only the wordmark follows light/dark. */
-export function Logo({ light = false, className }: LogoProps) {
+/** The shield mark plus the "CMC Group" wordmark. `dark` renders the
+ * wordmark in white for use on the dark footer band. */
+export function Logo({ dark = false, className }: { dark?: boolean; className?: string }) {
   return (
-    <span className={cn("flex items-center gap-2.5 font-display", className)}>
+    <span className={cn("flex items-center gap-2.5", className)}>
       <LogoMark className="h-8 w-8" />
       <span className="flex items-baseline gap-1.5">
-        <span
-          className={cn(
-            "text-lg font-bold tracking-tight",
-            light ? "text-white" : "text-paper"
-          )}
-        >
+        <span className={cn("text-lg font-bold tracking-tight", dark ? "text-white" : "text-text")}>
           CMC
         </span>
         <span
           className={cn(
-            "text-[11px] font-semibold uppercase tracking-[0.25em]",
-            light ? "text-white/60" : "text-paper/50"
+            "text-[11px] font-semibold uppercase tracking-[0.2em]",
+            dark ? "text-white/55" : "text-text-dim"
           )}
         >
           Group

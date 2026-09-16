@@ -5,24 +5,19 @@ interface Crumb {
   href?: string;
 }
 
-interface BreadcrumbsProps {
-  items: readonly Crumb[];
-  className?: string;
-}
-
-export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, className }: { items: readonly Crumb[]; className?: string }) {
   return (
     <nav aria-label="Breadcrumb" className={className}>
-      <ol className="flex flex-wrap items-center gap-2 text-xs text-white/50">
+      <ol className="flex flex-wrap items-center gap-2 text-xs text-text-dim">
         {items.map((item, i) => (
           <li key={item.label} className="flex items-center gap-2">
             {i > 0 ? <span aria-hidden>/</span> : null}
             {item.href ? (
-              <Link href={item.href} className="shrink-0 transition-colors hover:text-white">
+              <Link href={item.href} className="shrink-0 hover:text-text">
                 {item.label}
               </Link>
             ) : (
-              <span className="max-w-[200px] truncate text-white/80 sm:max-w-xs">{item.label}</span>
+              <span className="max-w-[220px] truncate text-text">{item.label}</span>
             )}
           </li>
         ))}

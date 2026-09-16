@@ -1,54 +1,25 @@
 import Image from "next/image";
-import { GlowField } from "@/components/ui/GlowField";
-import { FloatingIcons } from "@/components/ui/FloatingIcons";
-import { foundation, teamGrowth } from "@/data/home";
+import { foundation } from "@/data/home";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function FoundationSection() {
   return (
-    <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
-      <GlowField />
-      <FloatingIcons seed={3} count={3} />
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-        <div className="relative aspect-4/5 overflow-hidden rounded-2xl border border-line/70">
+    <section className="py-20 sm:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+        <Reveal className="relative aspect-4/5 overflow-hidden rounded-2xl border border-line lg:order-2">
           <Image
-            src="/images/photos/img-2204.jpeg"
-            alt="The CMC Group team reviewing performance numbers on the board"
+            src={foundation.image.src}
+            alt={foundation.image.alt}
             fill
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-        </div>
-
-        <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-            {foundation.eyebrow}
-          </p>
-          <h2 className="text-balance font-display text-3xl font-medium leading-tight tracking-tight text-paper sm:text-4xl">
-            {foundation.heading}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-paper/65">{foundation.body}</p>
-
-          <div className="mt-10 border-t border-line/70 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-              {teamGrowth.eyebrow}
-            </p>
-            <h3 className="mt-2 font-display text-xl font-semibold text-paper">
-              {teamGrowth.heading}
-            </h3>
-            <dl className="mt-6 space-y-5">
-              {teamGrowth.points.map((point) => (
-                <div key={point.title} className="flex gap-4">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-400" />
-                  <div>
-                    <dt className="font-semibold text-paper">{point.title}</dt>
-                    <dd className="mt-1 text-sm leading-relaxed text-paper/60">{point.body}</dd>
-                  </div>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
+        </Reveal>
+        <Reveal className="lg:order-1">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">{foundation.eyebrow}</p>
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-text sm:text-4xl">{foundation.heading}</h2>
+          <p className="mt-4 text-base leading-relaxed text-text-dim">{foundation.body}</p>
+        </Reveal>
       </div>
     </section>
   );
