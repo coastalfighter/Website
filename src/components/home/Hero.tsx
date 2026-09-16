@@ -1,26 +1,37 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
+import { GradientText } from "@/components/ui/GradientText";
+import { NetworkCanvas } from "./NetworkCanvas";
 import { heroContent } from "@/data/home";
 import { heroStats } from "@/data/site";
 
+const HIGHLIGHT = "industry-leading";
+
 export function Hero() {
+  const [before, after] = heroContent.headline.split(HIGHLIGHT);
+
   return (
-    <section className="border-b border-line bg-ink-2">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
+    <section className="relative overflow-hidden border-b border-line">
+      <div className="glow-field" />
+      <div className="grid-pattern absolute inset-0 -z-10" />
+      <NetworkCanvas className="absolute inset-0 -z-10 h-full w-full" />
+
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
         <div>
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand-600">
+          <p className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand-400 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-400 animate-pulse" />
             {heroContent.eyebrow}
           </p>
-          <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-text sm:text-5xl">
-            {heroContent.headline}
+          <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-text sm:text-5xl lg:text-6xl">
+            {before}
+            <GradientText>{HIGHLIGHT}</GradientText>
+            {after}
           </h1>
-          <p className="mt-5 max-w-lg text-balance text-lg leading-relaxed text-text-dim">
-            {heroContent.subcopy}
-          </p>
+          <p className="mt-5 max-w-lg text-balance text-lg leading-relaxed text-text-dim">{heroContent.subcopy}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button href={heroContent.cta.href}>{heroContent.cta.label}</Button>
-            <Button href={heroContent.secondaryCta.href} variant="secondary">
+            <Button href={heroContent.secondaryCta.href} variant="onDark">
               {heroContent.secondaryCta.label}
             </Button>
           </div>
@@ -28,7 +39,7 @@ export function Hero() {
             {heroStats.map((stat) => (
               <div key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="text-3xl font-bold text-text">
+                <dd className="font-mono text-3xl font-bold text-text [text-shadow:0_0_24px_color-mix(in_oklab,var(--color-brand-400)_50%,transparent)]">
                   <CountUp value={stat.value} suffix={stat.suffix} />
                 </dd>
                 <p className="mt-1 text-sm text-text-dim">{stat.label}</p>
@@ -37,15 +48,19 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-line lg:aspect-square">
-          <Image
-            src="/images/photos/img-2281.jpeg"
-            alt="The CMC Group team celebrating together"
-            fill
-            priority
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="object-cover"
-          />
+        <div className="relative">
+          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500/20 to-accent-500/20 blur-2xl" />
+          <div className="relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square">
+            <Image
+              src="/images/photos/img-2281.jpeg"
+              alt="The CMC Group team celebrating together"
+              fill
+              priority
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
+          </div>
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ export function SectionHeading({ eyebrow, heading, body, align = "left", classNa
   return (
     <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">{eyebrow}</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">{eyebrow}</p>
       ) : null}
       <h2 className="text-balance text-3xl font-bold tracking-tight text-text sm:text-4xl">{heading}</h2>
       {body ? <p className="mt-4 text-base leading-relaxed text-text-dim">{body}</p> : null}

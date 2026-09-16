@@ -14,7 +14,7 @@ export function PageHeader({ eyebrow, heading, body, breadcrumbs }: PageHeaderPr
     <div className="border-b border-line bg-ink-2">
       <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
         {breadcrumbs ? <Breadcrumbs items={breadcrumbs} className="mb-4" /> : null}
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">{eyebrow}</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">{eyebrow}</p>
         <h1 className="max-w-2xl text-balance text-3xl font-bold tracking-tight text-text sm:text-4xl">
           {heading}
         </h1>

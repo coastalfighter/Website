@@ -3,7 +3,8 @@ import { finalCta } from "@/data/home";
 
 export function FinalCtaSection() {
   return (
-    <section className="border-t border-line bg-ink-2 py-20 sm:py-28">
+    <section className="relative overflow-hidden border-t border-line bg-ink-2 py-20 sm:py-28">
+      <div className="glow-field" />
       <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
         <h2 className="text-balance text-3xl font-bold tracking-tight text-text sm:text-4xl">
           {finalCta.heading}

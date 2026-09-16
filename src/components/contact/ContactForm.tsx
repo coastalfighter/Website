@@ -5,7 +5,7 @@ import { useState, type FormEvent } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-md border border-line bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim/50 outline-none transition-colors focus:border-brand-400";
+  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim/50 outline-none transition-colors focus:border-brand-400";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -90,7 +90,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-md bg-brand-500 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-md bg-brand-500 px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-brand-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send Message"}
       </button>

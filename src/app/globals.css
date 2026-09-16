@@ -2,29 +2,34 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Neutral base — a plain light site, not a tinted "gradient wash." */
-  --color-ink: #ffffff;
-  --color-ink-2: #f8fafc;
-  --color-line: #e2e8f0;
+  /* A deep navy, not pure black — lets the logo's blue and red glow rather
+     than go flat against the background. */
+  --color-ink: #0a0e1a;
+  --color-ink-2: #0d1220;
+  --color-surface: #111827;
+  --color-line: #1f2b45;
 
-  --color-text: #0f172a;
-  --color-text-dim: #475569;
+  --color-text: #f1f5f9;
+  --color-text-dim: #94a3b8;
 
-  /* Blue and red, taken directly from the CMC shield. Blue carries the
-     site (links, CTAs, focus states); red is used sparingly as a single
-     accent, not blended into every surface. */
-  --color-brand-600: #1a56c4;
-  --color-brand-500: #1e6fe0;
-  --color-brand-400: #4f8fe8;
-  --color-brand-50: #eef4fd;
+  /* Blue and red, sampled directly from the CMC mark. */
+  --color-brand-600: #1c86b8;
+  --color-brand-500: #29a9e0;
+  --color-brand-400: #5cc3ea;
+  --color-brand-300: #9adcf3;
 
-  --color-accent-600: #b91c1c;
-  --color-accent-500: #e0272a;
+  --color-accent-600: #c21f26;
+  --color-accent-500: #e9333a;
+  --color-accent-400: #f0656a;
 
-  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 8px -2px rgb(15 23 42 / 0.06);
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.2), 0 8px 24px -8px rgb(0 0 0 / 0.35);
+  --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-500) 35%, transparent);
 
   --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-blob-drift: blob-drift 16s ease-in-out infinite;
+  --animate-blob-drift-slow: blob-drift 22s ease-in-out infinite reverse;
 
   @keyframes fade-up {
     from {
@@ -36,10 +41,22 @@
       transform: translateY(0);
     }
   }
+  @keyframes blob-drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(4%, -6%) scale(1.08);
+    }
+    66% {
+      transform: translate(-5%, 4%) scale(0.96);
+    }
+  }
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
@@ -66,9 +83,49 @@ body {
 
 ::selection {
   background: var(--color-brand-500);
-  color: white;
+  color: var(--color-ink);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+/** A soft grid, barely visible, for texture under dark sections. */
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+/** Two blurred brand-colored blobs, gently drifting — the one decorative
+ * background treatment used across dark sections. */
+.glow-field {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow-field::before,
+.glow-field::after {
+  content: "";
+  position: absolute;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 9999px;
+  filter: blur(120px);
+}
+.glow-field::before {
+  top: -10rem;
+  left: -10rem;
+  background: color-mix(in oklab, var(--color-brand-500) 30%, transparent);
+  animation: var(--animate-blob-drift);
+}
+.glow-field::after {
+  bottom: -14rem;
+  right: -10rem;
+  background: color-mix(in oklab, var(--color-accent-500) 22%, transparent);
+  animation: var(--animate-blob-drift-slow);
 }

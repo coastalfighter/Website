@@ -1,20 +1,15 @@
 import { cn } from "@/lib/cn";
 
-/** The CMC shield: blue left, red right, white crown at the center. Fixed
- * colors — this is the literal brand mark, not a themeable element. */
+/** The CMC mark: a folded blue/red chevron hexagon. Fixed colors — this is
+ * the literal brand mark, not a themeable element. */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 205" className={cn("h-8 w-8", className)} role="img" aria-label="CMC Group">
-      <path d="M40,10 L100,30 L100,195 L20,120 L20,60 Z" fill="#1E6FE0" />
-      <path d="M160,10 L100,30 L100,195 L180,120 L180,60 Z" fill="#E0272A" />
+    <svg viewBox="0 0 200 200" className={cn("h-8 w-8", className)} role="img" aria-label="CMC Group">
+      <path d="M40,20 L100,45 L100,190 L20,130 L20,70 Z" fill="#29A9E0" />
+      <path d="M160,20 L100,45 L100,190 L180,130 L180,70 Z" fill="#E9333A" />
       <g fill="#ffffff">
-        <rect x="70" y="88" width="60" height="16" rx="2" />
-        <polygon points="70,90 82,90 76,58" />
-        <polygon points="89,90 111,90 100,46" />
-        <polygon points="118,90 130,90 124,58" />
-        <circle cx="76" cy="55" r="5" />
-        <circle cx="100" cy="43" r="6" />
-        <circle cx="124" cy="55" r="5" />
+        <polygon points="55,55 100,90 145,55 145,75 100,110 55,75" />
+        <polygon points="65,100 100,130 135,100 135,118 100,148 65,118" />
       </g>
     </svg>
   );

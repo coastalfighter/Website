@@ -13,7 +13,7 @@ export function FaqAccordion({ items, className }: { items: readonly FaqItem[]; 
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className={cn("divide-y divide-line rounded-xl border border-line bg-white", className)}>
+    <div className={cn("divide-y divide-line rounded-xl border border-line bg-surface", className)}>
       {items.map((item, i) => {
         const open = openIndex === i;
         return (

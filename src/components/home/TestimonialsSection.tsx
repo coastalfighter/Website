@@ -20,7 +20,7 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial, i) => (
             <Card key={testimonial.name} delay={i * 0.06}>
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-50 text-sm font-semibold text-brand-600">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500/15 text-sm font-semibold text-brand-400">
                   {initialsFor(testimonial.name)}
                 </span>
                 <div>

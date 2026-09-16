@@ -23,7 +23,8 @@ export default function BlogIndexPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
       />
 
-      <section className="py-20 sm:py-28">
+      <section className="relative overflow-hidden py-20 sm:py-28">
+        <div className="glow-field" />
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           {featured ? (
             <Reveal>
@@ -31,7 +32,7 @@ export default function BlogIndexPage() {
                 href={`/blog/${featured.slug}`}
                 className="block rounded-2xl border border-line bg-ink-2 p-8 transition-colors hover:border-brand-400 sm:p-12"
               >
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand-600">
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-400">
                   Latest &middot;{" "}
                   {new Date(featured.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                 </p>
@@ -46,7 +47,7 @@ export default function BlogIndexPage() {
             {rest.map((post, i) => (
               <Card key={post.slug} delay={(i % 3) * 0.06} className="p-0">
                 <Link href={`/blog/${post.slug}`} className="flex h-full flex-col p-6">
-                  <time className="text-xs font-semibold uppercase tracking-wider text-brand-600">
+                  <time className="text-xs font-semibold uppercase tracking-wider text-brand-400">
                     {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </time>
                   <h3 className="mt-3 text-lg font-semibold leading-snug text-text">{post.title}</h3>

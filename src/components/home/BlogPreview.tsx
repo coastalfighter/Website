@@ -26,7 +26,7 @@ export function BlogPreview() {
           {posts.map((post, i) => (
             <Card key={post.slug} delay={i * 0.06} className="p-0">
               <Link href={`/blog/${post.slug}`} className="flex h-full flex-col p-6">
-                <time className="text-xs font-semibold uppercase tracking-wider text-brand-600">
+                <time className="text-xs font-semibold uppercase tracking-wider text-brand-400">
                   {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                 </time>
                 <h3 className="mt-3 text-lg font-semibold leading-snug text-text">{post.title}</h3>

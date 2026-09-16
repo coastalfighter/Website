@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
-import { Reveal } from "@/components/ui/Reveal";
+import { StickyProcess } from "@/components/ui/StickyProcess";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
 import { whoWeAre, processPillars, missionOfferings, expertServices } from "@/data/whatWeDo";
@@ -36,18 +36,11 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
+      <section className="relative overflow-hidden border-y border-line bg-ink-2 py-20 sm:py-28">
+        <div className="glow-field" />
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <SectionHeading eyebrow="Proven Process" heading="The blueprint for performance" align="center" className="mx-auto" />
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {processPillars.map((pillar, i) => (
-              <Reveal key={pillar.title} delay={i * 0.08}>
-                <span className="text-sm font-semibold text-brand-600">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-lg font-semibold text-text">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-dim">{pillar.description}</p>
-              </Reveal>
-            ))}
-          </div>
+          <StickyProcess steps={processPillars} className="mt-16" />
         </div>
       </section>
 

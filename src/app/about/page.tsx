@@ -41,7 +41,7 @@ export default function AboutPage() {
 
       <section className="py-20 sm:py-28">
         <div className="mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-2 lg:px-8">
-          <Reveal>
+          <Reveal direction="left">
             <h2 className="text-2xl font-bold tracking-tight text-text">Our Goals</h2>
             <ul className="mt-6 space-y-4">
               {goals.map((item) => (
@@ -54,16 +54,16 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="space-y-6">
-            <Card>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-600">Our Mission</h3>
+            <Card direction="right">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Mission</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">{mission}</p>
             </Card>
-            <Card delay={0.06}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-600">Our Vision</h3>
+            <Card delay={0.06} direction="right">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Vision</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">{vision}</p>
             </Card>
-            <Card delay={0.12}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-600">Our Values</h3>
+            <Card delay={0.12} direction="right">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Values</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {values.map((value) => (
                   <span key={value} className="rounded-full border border-line px-3 py-1 text-xs font-medium text-text-dim">
@@ -90,7 +90,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28">
+      <section className="relative overflow-hidden py-20 sm:py-28">
+        <div className="glow-field" />
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading eyebrow="Leadership Team" heading="The people driving CMC forward" />
@@ -99,7 +100,7 @@ export default function AboutPage() {
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {leadershipTeam.map((member, i) => (
               <Reveal key={member.name} delay={(i % 5) * 0.05} className="text-center">
-                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-lg font-semibold text-brand-600">
+                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-500/15 text-lg font-semibold text-brand-400">
                   {initialsFor(member.name)}
                 </span>
                 <p className="mt-3 font-semibold text-text">{member.name}</p>
@@ -113,7 +114,7 @@ export default function AboutPage() {
       <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <SectionHeading eyebrow="Proven Results" heading="Numbers that back up the promise" align="center" className="mx-auto" />
-          <div className="mt-14 overflow-hidden rounded-xl border border-line bg-white shadow-card">
+          <div className="mt-14 overflow-hidden rounded-xl border border-line bg-surface shadow-card">
             <div className="grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {provenResults.map((result) => (
                 <div key={result.label} className="px-6 py-10 text-center">
@@ -165,7 +166,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
           <p className="text-balance text-2xl italic leading-snug text-text/85 sm:text-3xl">&ldquo;{teamQuote.text}&rdquo;</p>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-brand-600">&mdash; {teamQuote.author}</p>
+          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-brand-400">&mdash; {teamQuote.author}</p>
         </div>
       </section>
     </>

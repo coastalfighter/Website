@@ -12,11 +12,11 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-slate-900">
+    <footer className="border-t border-line bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Logo dark />
+            <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
               {siteConfig.description}
             </p>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 text-xs text-white/45 sm:flex-row">
           <p>&copy; {year} {siteConfig.legalName}. All rights reserved.</p>
           <p>Cerritos, California</p>
         </div>

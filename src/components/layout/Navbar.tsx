@@ -9,7 +9,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
         <Link href="/" aria-label={`${siteConfig.name} home`}>
           <Logo />
@@ -30,7 +30,7 @@ export function Navbar() {
         <div className="hidden md:block">
           <Link
             href="/contact"
-            className="rounded-md bg-brand-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-600"
+            className="rounded-md bg-brand-500 px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-brand-400"
           >
             Contact Us
           </Link>
@@ -50,7 +50,7 @@ export function Navbar() {
       </nav>
 
       {menuOpen ? (
-        <div className="border-t border-line bg-white md:hidden">
+        <div className="border-t border-line bg-ink md:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {navLinks.map((link) => (
               <Link
@@ -65,7 +65,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 rounded-md bg-brand-500 px-4 py-3 text-center text-base font-semibold text-white"
+              className="mt-2 rounded-md bg-brand-500 px-4 py-3 text-center text-base font-semibold text-ink"
             >
               Contact Us
             </Link>
