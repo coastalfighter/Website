@@ -20,6 +20,11 @@ same filename and it swaps in automatically, no code changes needed.
                           distinct photo per post instead)
   blog-card-thumb.jpg     Blog grid card thumbnail    (16:9, shared by
                           every card in the grid, same note as above)
+  team-header.jpg         Our Team page header               (4:3 crop)
+  team-headshot.jpg       Every team member headshot         (4:5 crop,
+                          shared by every card on /our-team — give each
+                          leadershipTeam entry in src/data/about.ts its
+                          own `image` field if you want distinct photos)
 
 Keep the same filename and roughly the same aspect ratio (the site crops
 to fill the frame via object-cover, so exact pixel dimensions don't
