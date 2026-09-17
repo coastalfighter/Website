@@ -17,7 +17,7 @@ export function BlogPreview() {
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading eyebrow="From the Blog" heading="Field-tested lessons on sales and leadership" />
-          <Link href="/blog" className="text-sm font-semibold text-text-dim hover:text-text">
+          <Link href="/blog" className="link-underline text-sm font-semibold text-text-dim hover:text-text">
             View all posts &rarr;
           </Link>
         </div>

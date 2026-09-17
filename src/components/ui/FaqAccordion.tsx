@@ -22,13 +22,13 @@ export function FaqAccordion({ items, className }: { items: readonly FaqItem[]; 
               type="button"
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="group flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-ink-2"
             >
               <span className="font-semibold text-text">{item.question}</span>
               <motion.span
                 animate={{ rotate: open ? 45 : 0 }}
                 transition={{ duration: 0.2 }}
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-text-dim"
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-text-dim transition-colors duration-200 group-hover:border-brand-400 group-hover:text-brand-400"
                 aria-hidden
               >
                 +

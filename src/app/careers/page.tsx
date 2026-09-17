@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { programTiers, teamGrowth } from "@/data/careers";
+import { careerGrowth, programTiers, d2dProgram } from "@/data/careers";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -16,15 +16,15 @@ export default function CareersPage() {
     <>
       <PageHeader
         eyebrow="Careers"
-        heading={teamGrowth.heading}
-        body="Your path to leadership starts on the doors — hands-on coaching from day one, promoted from within."
+        heading={careerGrowth.heading}
+        body={careerGrowth.body}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers" }]}
       />
 
       <section className="relative overflow-hidden py-20 sm:py-28">
         <div className="glow-field" />
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Your Path to Leadership" heading="Three tiers, one growth engine" align="center" className="mx-auto" />
+          <SectionHeading eyebrow={careerGrowth.eyebrow} heading="Three stages, one growth engine" align="center" className="mx-auto" />
           <div className="mt-14 grid gap-8 sm:grid-cols-3">
             {programTiers.map((tier, i) => (
               <Reveal key={tier.title} delay={i * 0.08} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
@@ -39,9 +39,9 @@ export default function CareersPage() {
 
       <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Team Growth" heading="What makes it different" align="center" className="mx-auto" />
+          <SectionHeading eyebrow={d2dProgram.eyebrow} heading={d2dProgram.heading} body={d2dProgram.body} align="center" className="mx-auto" />
           <div className="mt-14 grid gap-6 sm:grid-cols-3">
-            {teamGrowth.points.map((point, i) => (
+            {d2dProgram.components.map((point, i) => (
               <Card key={point.title} delay={i * 0.08}>
                 <h3 className="text-lg font-semibold text-text">{point.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-dim">{point.body}</p>

@@ -1,4 +1,8 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { GradientText } from "@/components/ui/GradientText";
@@ -6,15 +10,20 @@ import { NetworkCanvas } from "./NetworkCanvas";
 import { heroContent } from "@/data/home";
 import { heroStats } from "@/data/site";
 
-const HIGHLIGHT = "industry-leading";
+const HIGHLIGHT = "powered by people";
 
 export function Hero() {
   const [before, after] = heroContent.headline.split(HIGHLIGHT);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const photoY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, 90]);
+  const bgY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, -40]);
 
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      <div className="glow-field" />
-      <div className="grid-pattern absolute inset-0 -z-10" />
+    <section ref={sectionRef} className="relative overflow-hidden border-b border-line">
+      <motion.div style={{ y: bgY }} className="glow-field" />
+      <motion.div style={{ y: bgY }} className="grid-pattern absolute inset-0 -z-10" />
       <NetworkCanvas className="absolute inset-0 -z-10 h-full w-full" />
 
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
@@ -48,7 +57,7 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative">
+        <motion.div style={{ y: photoY }} className="group relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500/20 to-accent-500/20 blur-2xl" />
           <div className="relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square">
             <Image
@@ -57,11 +66,11 @@ export function Hero() {
               fill
               priority
               sizes="(min-width: 1024px) 40vw, 90vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { StickyProcess } from "@/components/ui/StickyProcess";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
-import { whoWeAre, processPillars, missionOfferings, expertServices } from "@/data/whatWeDo";
+import { whoWeAre, processIntro, processPillars, missionIntro, missionOfferings, expertServices } from "@/data/whatWeDo";
 
 export const metadata: Metadata = {
   title: "What We Do",
@@ -36,17 +36,29 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-line bg-ink-2 py-20 sm:py-28">
+      <section className="relative border-y border-line bg-ink-2 py-20 sm:py-28">
         <div className="glow-field" />
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Proven Process" heading="The blueprint for performance" align="center" className="mx-auto" />
+          <SectionHeading
+            eyebrow="Proven Process"
+            heading="The blueprint for performance"
+            body={processIntro}
+            align="center"
+            className="mx-auto"
+          />
           <StickyProcess steps={processPillars} className="mt-16" />
         </div>
       </section>
 
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Why Choose Us" heading="Our mission, in three offerings" align="center" className="mx-auto" />
+          <SectionHeading
+            eyebrow="Our Mission"
+            heading="Our mission, in three offerings"
+            body={missionIntro}
+            align="center"
+            className="mx-auto"
+          />
           <div className="mt-14 grid gap-6 sm:grid-cols-3">
             {missionOfferings.map((offering, i) => (
               <Card key={offering.title} delay={i * 0.08} className="text-center">

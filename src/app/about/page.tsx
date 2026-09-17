@@ -6,17 +6,19 @@ import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
-import { pressLogos } from "@/data/site";
+import { pressLogos, awardsAbout } from "@/data/site";
 import {
   aboutIntro,
   goals,
   mission,
   vision,
+  valuesBody,
   values,
   leadershipTeam,
   serviceAreas,
   provenResults,
   independentPartners,
+  resultsInAction,
   teamQuote,
 } from "@/data/about";
 
@@ -64,6 +66,7 @@ export default function AboutPage() {
             </Card>
             <Card delay={0.12} direction="right">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Values</h3>
+              <p className="mt-3 text-sm leading-relaxed text-text-dim">{valuesBody}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {values.map((value) => (
                   <span key={value} className="rounded-full border border-line px-3 py-1 text-xs font-medium text-text-dim">
@@ -144,10 +147,12 @@ export default function AboutPage() {
       </section>
 
       <section className="border-t border-line bg-ink-2 py-16">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
-            Trusted by industry leaders
-          </p>
+        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">{awardsAbout.eyebrow}</p>
+          <h2 className="text-2xl font-bold text-text">{awardsAbout.heading}</h2>
+          <p className="mt-4 text-sm leading-relaxed text-text-dim">{awardsAbout.body}</p>
+        </div>
+        <div className="mx-auto mt-10 max-w-6xl px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
             {pressLogos.map((press) => (
               <Image
@@ -165,7 +170,8 @@ export default function AboutPage() {
 
       <section className="py-20">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
-          <p className="text-balance text-2xl italic leading-snug text-text/85 sm:text-3xl">&ldquo;{teamQuote.text}&rdquo;</p>
+          <p className="text-sm leading-relaxed text-text-dim">{resultsInAction}</p>
+          <p className="mt-10 text-balance text-2xl italic leading-snug text-text/85 sm:text-3xl">&ldquo;{teamQuote.text}&rdquo;</p>
           <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-brand-400">&mdash; {teamQuote.author}</p>
         </div>
       </section>

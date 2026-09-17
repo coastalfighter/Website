@@ -71,19 +71,45 @@ export const faqs = [
 export const testimonials = [
   {
     name: "Andre Parada",
-    detail: "A CMC partner for more than a decade, citing consistent service and steady account growth.",
+    quote:
+      "Over the last decade I've had the pleasure of being partnered with CMC and I can't say enough good things about them. The relationships I've built are those that will last a lifetime. There's nothing better than being part of a company that truly values you and cares about your growth. This business has shaped and transformed my life and that is something I will never take for granted!",
   },
   {
     name: "Henry Vargas",
-    detail: "Highlighted the responsiveness and professionalism of his CMC service team.",
+    quote:
+      "Gio from CMC has been great to work with! Their internet service is fast and reliable, and I really like the security system. Customer service has been helpful every time I've needed support. It's convenient to have internet, TV, and security all in one company. I definitely recommend them for home or business services.",
   },
   {
     name: "Jennifer Mendoza",
-    detail: "Reported a meaningful reduction in her monthly bill after switching through CMC.",
+    quote:
+      "Very thankful that CMC walked into my business. Gio was super attentive and answered all my requests. He was very responsive when I called or texted him. He lowered my bill by $100! If that's not a steal, I don't know what is! Will definitely recommend CMC to my colleagues.",
+  },
+  {
+    name: "Corey Yee",
+    quote:
+      "They helped me greatly reduce my monthly bill. Showed me exactly where I was overpaying and was able to find me a solution while still getting me DirecTV for less monthly. Great value and thankful to have gotten helped!",
+  },
+  {
+    name: "Russell Hirata",
+    quote:
+      "They helped my parents' business get a better discount on their rates. I'm amazed how much they were paying since they never reviewed their bill. Thankful for having them review our account and helping my parents.",
   },
 ] as const;
+
+export const clientStat = { value: 2000, suffix: "+", label: "Happy clients" } as const;
 
 export const heroStats = [
   { value: 200, suffix: "+", label: "Small business partners" },
   { value: 110, suffix: "+", label: "National brands served" },
 ] as const;
+
+export const awardsAbout = {
+  eyebrow: "Voices From Our Network",
+  heading: "Trusted by Industry Leaders",
+  body: "Companies choose CMC Group because we deliver consistent, measurable results backed by proven systems and trusted partnerships with top telecom and technology brands. Our track record of scalable growth and professional execution gives clients the confidence that their goals will be met with precision and accountability. With every campaign, we demonstrate why industry leaders rely on CMC as their go-to partner for market expansion and customer acquisition.",
+} as const;
+
+export const awardsHome = {
+  heading: "Proud to be an award-winning solutions provider",
+  body: "CMC Group has earned recognition for delivering measurable growth, strong client relationships, and consistent execution across national markets. Our commitment to professionalism, training, and performance has positioned us as a trusted solutions provider for leading telecom and technology partners.",
+} as const;

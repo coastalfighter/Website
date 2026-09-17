@@ -40,13 +40,13 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-white/70 hover:text-white">
+                  <Link href={link.href} className="link-underline text-sm text-white/70 hover:text-white">
                     {link.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/contact" className="text-sm text-white/70 hover:text-white">
+                <Link href="/contact" className="link-underline text-sm text-white/70 hover:text-white">
                   Contact
                 </Link>
               </li>
@@ -57,12 +57,12 @@ export function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-white/40">Get in touch</h3>
             <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li>
-                <a href={siteConfig.phoneHref} className="hover:text-white">
+                <a href={siteConfig.phoneHref} className="link-underline hover:text-white">
                   {siteConfig.phone}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-white">
+                <a href={`mailto:${siteConfig.email}`} className="link-underline hover:text-white">
                   {siteConfig.email}
                 </a>
               </li>

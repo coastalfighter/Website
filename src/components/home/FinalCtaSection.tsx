@@ -13,7 +13,7 @@ export function FinalCtaSection() {
           {finalCta.body}
         </p>
         <div className="mt-8 flex justify-center">
-          <Button href="/contact">Start a Conversation</Button>
+          <Button href={finalCta.cta.href}>{finalCta.cta.label}</Button>
         </div>
       </div>
     </section>

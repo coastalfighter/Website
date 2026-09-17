@@ -11,7 +11,7 @@ export function FaqSection() {
         <FaqAccordion items={faqs} className="mt-12" />
         <p className="mt-8 text-center text-sm text-text-dim">
           Still have a question?{" "}
-          <Link href="/contact" className="font-semibold text-brand-400 hover:underline">
+          <Link href="/contact" className="link-underline font-semibold text-brand-400">
             Get in touch
           </Link>
           .

@@ -28,7 +28,7 @@ export function CountUp({ value, suffix = "", duration = 1.2, className }: Count
 
   return (
     <span ref={ref} className={cn("font-mono tabular-nums", className)}>
-      {display}
+      {display.toLocaleString("en-US")}
       {suffix}
     </span>
   );

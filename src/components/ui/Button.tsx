@@ -47,7 +47,7 @@ export function Button({ href, children, variant = "primary", className }: Butto
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors",
+          "group inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]",
           variant === "primary" && "bg-brand-500 text-ink hover:bg-brand-400",
           variant === "secondary" && "border border-line text-text hover:border-brand-400 hover:text-brand-300",
           variant === "onDark" && "border border-white/20 text-white hover:border-brand-300 hover:text-brand-300",
@@ -55,7 +55,9 @@ export function Button({ href, children, variant = "primary", className }: Butto
         )}
       >
         {children}
-        <span aria-hidden>&rarr;</span>
+        <span aria-hidden className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+          &rarr;
+        </span>
       </Link>
     </motion.div>
   );

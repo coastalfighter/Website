@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <path d="M40,20 L100,45 L100,190 L20,130 L20,70 Z" fill="#29A9E0" />
-  <path d="M160,20 L100,45 L100,190 L180,130 L180,70 Z" fill="#E9333A" />
-  <g fill="#ffffff">
-    <polygon points="55,55 100,90 145,55 145,75 100,110 55,75" />
-    <polygon points="65,100 100,130 135,100 135,118 100,148 65,118" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <rect width="40" height="40" rx="9" fill="#0a0e1a" />
+  <rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="none" stroke="#5cc3ea" stroke-width="2" />
+  <text x="20" y="26" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" font-weight="700" fill="#5cc3ea">CMC</text>
 </svg>
