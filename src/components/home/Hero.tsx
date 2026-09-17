@@ -21,10 +21,11 @@ export function Hero() {
   const bgY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, -90]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden border-b border-line">
+    <section ref={sectionRef} className="relative overflow-hidden">
       <motion.div style={{ y: bgY }} className="glow-field" />
       <motion.div style={{ y: bgY }} className="grid-pattern absolute inset-0 -z-10" />
       <NetworkCanvas className="absolute inset-0 -z-10 h-full w-full" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-linear-to-b from-transparent to-ink" />
 
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
         <div>
