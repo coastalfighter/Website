@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
+import { Reveal } from "@/components/ui/Reveal";
 import { StickyProcess } from "@/components/ui/StickyProcess";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
@@ -20,18 +22,32 @@ export default function WhatWeDoPage() {
         heading="The blueprint for performance, built market by market"
         body="Strategy, training, execution, and performance — the four pillars behind every brand CMC represents."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "What We Do" }]}
+        image={{
+          src: "/images/placeholders/what-we-do-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/what-we-do-header.jpg",
+        }}
       />
 
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <SectionHeading eyebrow={whoWeAre.eyebrow} heading={whoWeAre.heading} body={whoWeAre.body} />
-            <Card className="text-center">
-              <p className="text-5xl font-bold text-text">
-                <CountUp value={whoWeAre.stat.value} suffix={whoWeAre.stat.suffix} />
-              </p>
-              <p className="mt-2 text-sm text-text-dim">{whoWeAre.stat.label}</p>
-            </Card>
+            <Reveal direction="right" className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line lg:aspect-square">
+              <Image
+                src="/images/placeholders/who-we-are.jpg"
+                alt="Placeholder — replace with your own photo at public/images/placeholders/who-we-are.jpg"
+                fill
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/70 via-transparent to-transparent" />
+              <div className="absolute inset-x-5 bottom-5 rounded-xl border border-white/10 bg-ink/70 px-5 py-4 backdrop-blur">
+                <p className="font-mono text-3xl font-bold text-text [text-shadow:0_0_24px_color-mix(in_oklab,var(--color-brand-400)_50%,transparent)]">
+                  <CountUp value={whoWeAre.stat.value} suffix={whoWeAre.stat.suffix} />
+                </p>
+                <p className="mt-1 text-sm text-text-dim">{whoWeAre.stat.label}</p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

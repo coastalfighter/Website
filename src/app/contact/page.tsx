@@ -17,6 +17,10 @@ export default function ContactPage() {
         heading="Start a conversation"
         body="Tell us about your brand and your market — we'll follow up within one business day."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
+        image={{
+          src: "/images/placeholders/contact-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/contact-header.jpg",
+        }}
       />
 
       <section className="py-20 sm:py-28">

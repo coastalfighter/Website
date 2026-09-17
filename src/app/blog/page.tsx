@@ -21,6 +21,10 @@ export default function BlogIndexPage() {
         heading="Field-tested lessons on sales and leadership"
         body="Notes from the field on goal-setting, coaching, and building a career in customer acquisition."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
+        image={{
+          src: "/images/placeholders/blog-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/blog-header.jpg",
+        }}
       />
 
       <section className="relative overflow-hidden py-20 sm:py-28">

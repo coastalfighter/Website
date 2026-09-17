@@ -11,9 +11,9 @@ interface RevealProps {
 }
 
 const OFFSETS: Record<NonNullable<RevealProps["direction"]>, { x?: number; y?: number }> = {
-  up: { y: 20 },
-  left: { x: -24 },
-  right: { x: 24 },
+  up: { y: 32 },
+  left: { x: -48 },
+  right: { x: 48 },
 };
 
 /** The one scroll effect used everywhere: fade + slide + a subtle 3D
@@ -23,7 +23,7 @@ const OFFSETS: Record<NonNullable<RevealProps["direction"]>, { x?: number; y?: n
 export function Reveal({ children, delay = 0, direction = "up", className }: RevealProps) {
   const offset = OFFSETS[direction];
   const reducedMotion = useReducedMotion();
-  const tilt = reducedMotion ? 0 : 6;
+  const tilt = reducedMotion ? 0 : 14;
   return (
     <motion.div
       initial={{ opacity: 0, rotateX: tilt, ...offset }}

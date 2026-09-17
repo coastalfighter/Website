@@ -37,14 +37,20 @@ export const teamGrowthHome = {
     "Collaboration, ambition, and accountability define our teams and the leaders who rise from them.",
   ],
   cta: { label: "Join Our Team", href: "/careers" },
-  image: { src: "/images/photos/img-2281.jpeg", alt: "CMC Group team members training together" },
+  image: {
+    src: "/images/placeholders/team-growth.jpg",
+    alt: "Placeholder — replace with your own photo at public/images/placeholders/team-growth.jpg",
+  },
 } as const;
 
 export const company = {
   eyebrow: "Our Company",
   heading: "A nationwide customer acquisition firm, built on relationships",
   body: "CMC Group is a nationwide customer acquisition firm partnering with leading telecom and technology brands to drive business growth. We combine proven sales systems, data-backed strategy, and a culture of leadership to deliver consistent, high-quality results. Built on professionalism and performance, CMC continues to expand its reach while setting new standards for trust and scalability in the industry.",
-  image: { src: "/images/photos/img-2204.jpeg", alt: "The CMC Group team reviewing performance numbers" },
+  image: {
+    src: "/images/placeholders/company-team.jpg",
+    alt: "Placeholder — replace with your own photo at public/images/placeholders/company-team.jpg",
+  },
 } as const;
 
 export const finalCta = {

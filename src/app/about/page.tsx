@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
+import { Marquee } from "@/components/ui/Marquee";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
 import { pressLogos, awardsAbout } from "@/data/site";
@@ -39,6 +40,10 @@ export default function AboutPage() {
         heading={aboutIntro.heading}
         body={aboutIntro.body}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
+        image={{
+          src: "/images/placeholders/about-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/about-header.jpg",
+        }}
       />
 
       <section className="py-20 sm:py-28">
@@ -152,20 +157,18 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold text-text">{awardsAbout.heading}</h2>
           <p className="mt-4 text-sm leading-relaxed text-text-dim">{awardsAbout.body}</p>
         </div>
-        <div className="mx-auto mt-10 max-w-6xl px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-            {pressLogos.map((press) => (
-              <Image
-                key={press.name}
-                src={press.src}
-                alt={press.name}
-                width={110}
-                height={32}
-                className="h-6 w-auto object-contain opacity-50 grayscale transition-all hover:opacity-90 hover:grayscale-0"
-              />
-            ))}
-          </div>
-        </div>
+        <Marquee className="mx-auto mt-10 max-w-6xl">
+          {pressLogos.map((press) => (
+            <Image
+              key={press.name}
+              src={press.src}
+              alt={press.name}
+              width={180}
+              height={52}
+              className="h-10 w-auto shrink-0 object-contain opacity-50 grayscale transition-all hover:opacity-90 hover:grayscale-0 sm:h-11"
+            />
+          ))}
+        </Marquee>
       </section>
 
       <section className="py-20">

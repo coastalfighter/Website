@@ -19,6 +19,10 @@ export default function CareersPage() {
         heading={careerGrowth.heading}
         body={careerGrowth.body}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers" }]}
+        image={{
+          src: "/images/placeholders/careers-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/careers-header.jpg",
+        }}
       />
 
       <section className="relative overflow-hidden py-20 sm:py-28">

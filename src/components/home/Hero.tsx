@@ -17,8 +17,8 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const photoY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, 90]);
-  const bgY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, -40]);
+  const photoY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, 180]);
+  const bgY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, -90]);
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden border-b border-line">
@@ -61,8 +61,8 @@ export function Hero() {
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500/20 to-accent-500/20 blur-2xl" />
           <div className="relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square">
             <Image
-              src="/images/photos/img-2281.jpeg"
-              alt="The CMC Group team celebrating together"
+              src="/images/placeholders/hero-team.jpg"
+              alt="Placeholder — replace with your own photo at public/images/placeholders/hero-team.jpg"
               fill
               priority
               sizes="(min-width: 1024px) 40vw, 90vw"
