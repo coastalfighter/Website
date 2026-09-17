@@ -4,7 +4,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { leadershipTeam } from "@/data/about";
+import { leadershipTeam, independentPartners } from "@/data/about";
+import { slugify } from "@/lib/slugify";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -17,7 +18,7 @@ export default function OurTeamPage() {
       <PageHeader
         eyebrow="Our Team"
         heading="The people behind CMC Group"
-        body="A leadership team built almost entirely from people who started on the doors — every headshot below is a placeholder, easy to swap and easy to extend."
+        body="A leadership team built almost entirely from people who started on the doors — every headshot below is a placeholder, easy to swap."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Our Team" }]}
         image={{
           src: "/images/placeholders/team-header.jpg",
@@ -29,30 +30,55 @@ export default function OurTeamPage() {
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <SectionHeading eyebrow="Leadership" heading="Meet the team" align="center" className="mx-auto" />
           <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-            {leadershipTeam.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 4) * 0.06}>
-                <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
-                  <Image
-                    src="/images/placeholders/team-headshot.jpg"
-                    alt={`Placeholder headshot for ${member.name} — replace at public/images/placeholders/team-headshot.jpg`}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-4 font-semibold text-text">{member.name}</p>
-                <p className="text-sm text-text-dim">{member.title}</p>
-              </Reveal>
-            ))}
+            {leadershipTeam.map((member, i) => {
+              const src = `/images/placeholders/team/${slugify(member.name)}.jpg`;
+              return (
+                <Reveal key={member.name} delay={(i % 4) * 0.06}>
+                  <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${member.name} — replace at public${src}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-4 font-semibold text-text">{member.name}</p>
+                  <p className="text-sm text-text-dim">{member.title}</p>
+                </Reveal>
+              );
+            })}
           </div>
-          <p className="mt-10 text-center text-xs text-text-dim">
-            Adding a new team member is just adding an entry to <code>leadershipTeam</code> in{" "}
-            <code>src/data/about.ts</code> — the grid extends automatically.
-          </p>
         </div>
       </section>
 
-      <section className="border-t border-line bg-ink-2 py-20">
+      <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" align="center" className="mx-auto" />
+          <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+            {independentPartners.map((partner, i) => {
+              const src = `/images/placeholders/team/${slugify(partner.name)}.jpg`;
+              return (
+                <Reveal key={partner.name} delay={(i % 4) * 0.05}>
+                  <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${partner.name} — replace at public${src}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-4 font-semibold text-text">{partner.name}</p>
+                  <p className="text-sm text-text-dim">{partner.org}</p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center lg:px-8">
           <h2 className="text-balance text-3xl font-bold text-text sm:text-4xl">Want to see your headshot here?</h2>
           <p className="text-base leading-relaxed text-text-dim">

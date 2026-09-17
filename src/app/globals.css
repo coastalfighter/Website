@@ -239,3 +239,13 @@ html.custom-cursor * {
 .link-underline:hover::after {
   transform: scaleX(1);
 }
+
+/** Hides the scrollbar chrome on an internally-scrollable container
+ * without disabling scroll — used by HeightMatchedRow's right panel. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

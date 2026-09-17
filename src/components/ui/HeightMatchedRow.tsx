@@ -31,7 +31,7 @@ export function HeightMatchedRow({ left, right, className }: HeightMatchedRowPro
     <div className={cn("grid gap-16 lg:grid-cols-2 lg:items-start", className)}>
       <div ref={leftRef}>{left}</div>
       <div
-        className="lg:overflow-y-auto lg:pr-2 lg:[max-height:var(--matched-height)]"
+        className="no-scrollbar lg:overflow-y-auto lg:[max-height:var(--matched-height)]"
         style={height ? ({ "--matched-height": `${height}px` } as React.CSSProperties) : undefined}
       >
         {right}
