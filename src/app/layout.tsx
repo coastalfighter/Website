@@ -4,6 +4,7 @@ import { siteConfig } from "@/data/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,6 +45,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <div aria-hidden className="page-glow" />
+        <div aria-hidden className="grid-pattern fixed inset-0 -z-50" />
+        <CustomCursor />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

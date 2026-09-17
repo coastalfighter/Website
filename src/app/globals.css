@@ -139,6 +139,46 @@ body {
   animation: var(--animate-blob-drift-slow);
 }
 
+/** A dimmer, page-wide version of glow-field — fixed to the viewport so
+ * every section has some ambient color and grid texture, even ones that
+ * don't opt into their own stronger glow-field. */
+.page-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -50;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-glow::before,
+.page-glow::after {
+  content: "";
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  border-radius: 9999px;
+  filter: blur(150px);
+  opacity: 0.35;
+}
+.page-glow::before {
+  top: -14rem;
+  left: -14rem;
+  background: color-mix(in oklab, var(--color-brand-500) 30%, transparent);
+  animation: var(--animate-blob-drift);
+}
+.page-glow::after {
+  bottom: -18rem;
+  right: -14rem;
+  background: color-mix(in oklab, var(--color-accent-500) 22%, transparent);
+  animation: var(--animate-blob-drift-slow);
+}
+
+/** Custom cursor: hides the native cursor everywhere once the JS cursor
+ * is active (desktop, fine-pointer, motion-permitting only). */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
 /** The one text-link hover effect used everywhere: an underline that
  * slides in from the left, instead of an instant on/off underline. */
 .link-underline {
