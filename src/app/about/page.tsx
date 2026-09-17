@@ -10,6 +10,7 @@ import { HeightMatchedRow } from "@/components/ui/HeightMatchedRow";
 import { CountUp } from "@/components/ui/CountUp";
 import { Button } from "@/components/ui/Button";
 import { pressLogos, awardsAbout } from "@/data/site";
+import { slugify } from "@/lib/slugify";
 import {
   aboutIntro,
   goals,
@@ -29,10 +30,6 @@ export const metadata: Metadata = {
   title: "About",
   description: mission,
 };
-
-function initialsFor(name: string): string {
-  return name.split(" ").filter(Boolean).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
-}
 
 export default function AboutPage() {
   return (
@@ -132,15 +129,24 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {leadershipTeam.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 5) * 0.05} className="text-center">
-                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-500/15 text-lg font-semibold text-brand-400">
-                  {initialsFor(member.name)}
-                </span>
-                <p className="mt-3 font-semibold text-text">{member.name}</p>
-                <p className="text-xs text-text-dim">{member.title}</p>
-              </Reveal>
-            ))}
+            {leadershipTeam.map((member, i) => {
+              const src = `/images/placeholders/team/${slugify(member.name)}.jpg`;
+              return (
+                <Reveal key={member.name} delay={(i % 5) * 0.05} className="text-center">
+                  <div className="group relative mx-auto h-16 w-16 overflow-hidden rounded-full border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${member.name} — replace at public${src}`}
+                      fill
+                      sizes="64px"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-3 font-semibold text-text">{member.name}</p>
+                  <p className="text-xs text-text-dim">{member.title}</p>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
