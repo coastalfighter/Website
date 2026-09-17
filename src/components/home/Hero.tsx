@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { GradientText } from "@/components/ui/GradientText";
@@ -20,8 +20,26 @@ export function Hero() {
   const photoY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, 180]);
   const bgY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [0, -90]);
 
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useSpring(tiltX, { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(tiltY, { stiffness: 200, damping: 20 });
+
+  const handlePhotoMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const relX = (event.clientX - rect.left) / rect.width - 0.5;
+    const relY = (event.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(relX * 14);
+    tiltX.set(-relY * 14);
+  };
+  const handlePhotoLeave = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
+
   return (
-    <section ref={sectionRef} className="relative overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden bg-ink">
       <motion.div style={{ y: bgY }} className="glow-field" />
       <motion.div style={{ y: bgY }} className="grid-pattern absolute inset-0 -z-10" />
       <NetworkCanvas className="absolute inset-0 -z-10 h-full w-full" />
@@ -58,9 +76,14 @@ export function Hero() {
           </dl>
         </div>
 
-        <motion.div style={{ y: photoY }} className="group relative">
+        <motion.div style={{ y: photoY }} className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500/20 to-accent-500/20 blur-2xl" />
-          <div className="relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square">
+          <motion.div
+            onMouseMove={handlePhotoMove}
+            onMouseLeave={handlePhotoLeave}
+            style={{ rotateX, rotateY, transformPerspective: 1200 }}
+            className="group relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square"
+          >
             <Image
               src="/images/placeholders/hero-team.jpg"
               alt="Placeholder — replace with your own photo at public/images/placeholders/hero-team.jpg"
@@ -70,7 +93,34 @@ export function Hero() {
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
-          </div>
+          </motion.div>
+
+          <motion.div
+            aria-hidden={false}
+            animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transform: "perspective(600px) rotateX(8deg) rotateY(-10deg)" }}
+            className="absolute -top-6 -left-6 z-10 rounded-xl border border-white/10 bg-ink-2/80 px-4 py-3 shadow-glow backdrop-blur-md"
+          >
+            <p className="flex items-center gap-2 text-xs font-semibold text-text">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-500/20 text-brand-300">✓</span>
+              Authorized Dealer
+            </p>
+          </motion.div>
+
+          <motion.div
+            aria-hidden={false}
+            animate={reducedMotion ? undefined : { y: [0, 10, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            style={{ transform: "perspective(600px) rotateX(-8deg) rotateY(10deg)" }}
+            className="absolute -right-5 -bottom-5 z-10 rounded-xl border border-white/10 bg-ink-2/80 px-4 py-3 shadow-glow backdrop-blur-md"
+          >
+            <p className="font-mono text-lg font-bold text-text [text-shadow:0_0_16px_color-mix(in_oklab,var(--color-brand-400)_50%,transparent)]">
+              {heroStats[0]?.value}
+              {heroStats[0]?.suffix}
+            </p>
+            <p className="text-[11px] text-text-dim">{heroStats[0]?.label}</p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

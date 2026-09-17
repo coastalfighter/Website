@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { NetworkCanvas } from "@/components/home/NetworkCanvas";
 import "./globals.css";
 
 const inter = Inter({
@@ -45,8 +46,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <div aria-hidden className="page-glow" />
-        <div aria-hidden className="grid-pattern fixed inset-0 -z-50" />
+        <div aria-hidden className="page-glow">
+          <div className="page-glow-center" />
+        </div>
+        <div aria-hidden className="grid-pattern-ambient fixed inset-0 -z-50" />
+        <NetworkCanvas
+          className="pointer-events-none fixed inset-0 -z-40 h-full w-full opacity-70"
+          nodeCount={28}
+          linkDistance={170}
+        />
+        <div aria-hidden className="grain-overlay" />
         <CustomCursor />
         <Navbar />
         <main id="main-content">{children}</main>

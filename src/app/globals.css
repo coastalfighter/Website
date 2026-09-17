@@ -141,7 +141,9 @@ body {
 
 /** A dimmer, page-wide version of glow-field — fixed to the viewport so
  * every section has some ambient color and grid texture, even ones that
- * don't opt into their own stronger glow-field. */
+ * don't opt into their own stronger glow-field. Three blobs spread across
+ * the viewport (not just two corners) so the middle of the screen isn't
+ * left flat. */
 .page-glow {
   position: fixed;
   inset: 0;
@@ -153,23 +155,61 @@ body {
 .page-glow::after {
   content: "";
   position: absolute;
-  width: 46rem;
-  height: 46rem;
+  width: 50rem;
+  height: 50rem;
   border-radius: 9999px;
-  filter: blur(150px);
-  opacity: 0.35;
+  filter: blur(130px);
+  opacity: 0.5;
 }
 .page-glow::before {
-  top: -14rem;
-  left: -14rem;
-  background: color-mix(in oklab, var(--color-brand-500) 30%, transparent);
+  top: -16rem;
+  left: -16rem;
+  background: color-mix(in oklab, var(--color-brand-500) 38%, transparent);
   animation: var(--animate-blob-drift);
 }
 .page-glow::after {
-  bottom: -18rem;
-  right: -14rem;
-  background: color-mix(in oklab, var(--color-accent-500) 22%, transparent);
+  bottom: -20rem;
+  right: -16rem;
+  background: color-mix(in oklab, var(--color-accent-500) 28%, transparent);
   animation: var(--animate-blob-drift-slow);
+}
+.page-glow-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42rem;
+  height: 42rem;
+  border-radius: 9999px;
+  filter: blur(140px);
+  opacity: 0.22;
+  background: color-mix(in oklab, var(--color-brand-400) 30%, transparent);
+  transform: translate(-50%, -50%);
+  animation: var(--animate-blob-drift) reverse;
+}
+
+/** A full-viewport variant of the grid texture — unlike .grid-pattern
+ * (which fades out by mid-section, designed for top-anchored hero use),
+ * this stays visible across the whole fixed viewport rectangle so it
+ * reads at any scroll position on any page. */
+.grid-pattern-ambient {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%);
+}
+
+/** A faint animated film-grain texture over everything — cheap, static
+ * per-frame, but breaks up flat gradient banding for a more tactile,
+ * premium feel. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -30;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCUyM24pIi8+PC9zdmc+");
 }
 
 /** Custom cursor: hides the native cursor everywhere once the JS cursor

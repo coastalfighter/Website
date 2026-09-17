@@ -9,13 +9,19 @@ interface Node {
   vy: number;
 }
 
-const NODE_COUNT = 46;
-const LINK_DISTANCE = 150;
+const DEFAULT_NODE_COUNT = 46;
+const DEFAULT_LINK_DISTANCE = 150;
+
+interface NetworkCanvasProps {
+  className?: string;
+  nodeCount?: number;
+  linkDistance?: number;
+}
 
 /** A plain 2D canvas — a handful of drifting nodes, connected by lines when
  * close enough. No WebGL, no shader, no availability checks: just
  * CanvasRenderingContext2D, which every browser has. Subtle and cheap. */
-export function NetworkCanvas({ className }: { className?: string }) {
+export function NetworkCanvas({ className, nodeCount = DEFAULT_NODE_COUNT, linkDistance = DEFAULT_LINK_DISTANCE }: NetworkCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -40,7 +46,7 @@ export function NetworkCanvas({ className }: { className?: string }) {
     };
 
     const seedNodes = () => {
-      nodes = Array.from({ length: NODE_COUNT }, () => ({
+      nodes = Array.from({ length: nodeCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.25,
@@ -71,8 +77,8 @@ export function NetworkCanvas({ className }: { className?: string }) {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < LINK_DISTANCE) {
-            ctx.strokeStyle = `rgba(92, 195, 234, ${0.12 * (1 - dist / LINK_DISTANCE)})`;
+          if (dist < linkDistance) {
+            ctx.strokeStyle = `rgba(92, 195, 234, ${0.12 * (1 - dist / linkDistance)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -111,7 +117,7 @@ export function NetworkCanvas({ className }: { className?: string }) {
       cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [nodeCount, linkDistance]);
 
   return <canvas ref={canvasRef} className={className} aria-hidden />;
 }
