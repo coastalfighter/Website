@@ -10,6 +10,16 @@ same filename and it swaps in automatically, no code changes needed.
   careers-header.jpg      Careers page header         (4:3 crop)
   blog-header.jpg         Blog page header            (4:3 crop)
   contact-header.jpg      Contact page header         (4:3 crop)
+  about-banner.jpg        About page banner section         (wide, ~12:5)
+  what-we-do-banner.jpg   What We Do page banner section    (wide, ~12:5)
+  careers-banner.jpg      Careers page banner section       (wide, ~12:5)
+  blog-featured-banner.jpg  Blog index featured post image  (wide, ~12:5)
+  blog-post-featured.jpg  Every individual blog post's image (wide, ~12:5,
+                          shared by all posts — give BlogPost its own
+                          `image` field in src/data/blog.ts if you want a
+                          distinct photo per post instead)
+  blog-card-thumb.jpg     Blog grid card thumbnail    (16:9, shared by
+                          every card in the grid, same note as above)
 
 Keep the same filename and roughly the same aspect ratio (the site crops
 to fill the frame via object-cover, so exact pixel dimensions don't

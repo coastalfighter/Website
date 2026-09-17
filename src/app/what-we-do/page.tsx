@@ -86,6 +86,20 @@ export default function WhatWeDoPage() {
         </div>
       </section>
 
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal className="group relative aspect-12/5 overflow-hidden rounded-2xl border border-line">
+            <Image
+              src="/images/placeholders/what-we-do-banner.jpg"
+              alt="Placeholder — replace with your own photo at public/images/placeholders/what-we-do-banner.jpg"
+              fill
+              sizes="(min-width: 1024px) 1152px, 100vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </Reveal>
+        </div>
+      </section>
+
       <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <SectionHeading eyebrow="Expert Services" heading="Six ways we move the needle for partner brands" align="center" className="mx-auto" />

@@ -10,6 +10,11 @@ interface CardProps {
   delay?: number;
   direction?: "up" | "left" | "right";
   className?: string;
+  /** Stretch to fill the parent's height — correct when Cards sit side by
+   * side as grid items (so they line up), wrong when they're stacked
+   * vertically outside a grid (each would then fill the whole stretched
+   * column and overlap-stack with huge blank space). Default true. */
+  fullHeight?: boolean;
 }
 
 const TILT_DEGREES = 6;
@@ -17,7 +22,7 @@ const TILT_DEGREES = 6;
 /** A card with a cursor-tracked spotlight, a subtle 3D tilt toward the
  * cursor, and a glowing border on hover — the one hover effect used for
  * every card sitewide. */
-export function Card({ children, delay = 0, direction = "up", className }: CardProps) {
+export function Card({ children, delay = 0, direction = "up", className, fullHeight = true }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -46,14 +51,15 @@ export function Card({ children, delay = 0, direction = "up", className }: CardP
   const spotlight = useMotionTemplate`radial-gradient(240px circle at ${x}px ${y}px, color-mix(in oklab, var(--color-brand-400) 15%, transparent), transparent 70%)`;
 
   return (
-    <Reveal delay={delay} direction={direction} className="h-full">
+    <Reveal delay={delay} direction={direction} className={fullHeight ? "h-full" : undefined}>
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformPerspective: 800 }}
         className={cn(
-          "group relative h-full overflow-hidden rounded-xl border border-line bg-surface p-6 shadow-card transition-colors duration-300 hover:border-brand-400/50 hover:shadow-glow",
+          "group relative overflow-hidden rounded-xl border border-line bg-surface p-6 shadow-card transition-colors duration-300 hover:border-brand-400/50 hover:shadow-glow",
+          fullHeight && "h-full",
           className
         )}
       >

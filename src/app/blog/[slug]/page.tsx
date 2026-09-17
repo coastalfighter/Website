@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -35,7 +36,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <PageHeader eyebrow={formattedDate} heading={post.title} />
 
       <div className="mx-auto max-w-3xl px-6 pt-12 lg:px-8">
-        <Link href="/blog" className="text-sm font-semibold text-text-dim hover:text-text">
+        <div className="relative aspect-12/5 w-full overflow-hidden rounded-2xl border border-line">
+          <Image
+            src="/images/placeholders/blog-post-featured.jpg"
+            alt="Placeholder — replace with your own photo at public/images/placeholders/blog-post-featured.jpg"
+            fill
+            sizes="(min-width: 1024px) 768px, 100vw"
+            className="object-cover"
+          />
+        </div>
+
+        <Link href="/blog" className="link-underline mt-10 inline-block text-sm font-semibold text-text-dim hover:text-text">
           &larr; Back to blog
         </Link>
 

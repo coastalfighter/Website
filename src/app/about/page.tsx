@@ -61,15 +61,15 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="space-y-6">
-            <Card direction="right">
+            <Card direction="right" fullHeight={false}>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Mission</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">{mission}</p>
             </Card>
-            <Card delay={0.06} direction="right">
+            <Card delay={0.06} direction="right" fullHeight={false}>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Vision</h3>
               <p className="mt-3 text-base leading-relaxed text-text-dim">{vision}</p>
             </Card>
-            <Card delay={0.12} direction="right">
+            <Card delay={0.12} direction="right" fullHeight={false}>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-400">Our Values</h3>
               <p className="mt-3 text-sm leading-relaxed text-text-dim">{valuesBody}</p>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -95,6 +95,20 @@ export default function AboutPage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal className="group relative aspect-12/5 overflow-hidden rounded-2xl border border-line">
+            <Image
+              src="/images/placeholders/about-banner.jpg"
+              alt="Placeholder — replace with your own photo at public/images/placeholders/about-banner.jpg"
+              fill
+              sizes="(min-width: 1024px) 1152px, 100vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </Reveal>
         </div>
       </section>
 
