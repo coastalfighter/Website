@@ -11,9 +11,9 @@ interface CountUpProps {
   className?: string;
 }
 
-export function CountUp({ value, suffix = "", duration = 1.6, className }: CountUpProps) {
+export function CountUp({ value, suffix = "", duration = 1.2, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px -5% 0px" });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function CountUp({ value, suffix = "", duration = 1.6, className }: Count
 
   return (
     <span ref={ref} className={cn("font-mono tabular-nums", className)}>
-      {display}
+      {display.toLocaleString("en-US")}
       {suffix}
     </span>
   );

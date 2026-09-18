@@ -1,54 +1,60 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
-import { GlowField } from "@/components/ui/GlowField";
-import { FloatingIcons } from "@/components/ui/FloatingIcons";
-import { foundation, teamGrowth } from "@/data/home";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { company } from "@/data/home";
+import { awardsHome, pressLogos } from "@/data/site";
+import { Reveal } from "@/components/ui/Reveal";
+import { Marquee } from "@/components/ui/Marquee";
 
 export function FoundationSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [-70, 70]);
+
   return (
-    <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
-      <GlowField />
-      <FloatingIcons seed={3} count={3} />
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-        <div className="relative aspect-4/5 overflow-hidden rounded-2xl border border-line/70">
-          <Image
-            src="/images/photos/img-2204.jpeg"
-            alt="The CMC Group team reviewing performance numbers on the board"
-            fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-        </div>
+    <section ref={sectionRef} className="py-20 sm:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+        <Reveal direction="left" className="lg:order-2">
+          <motion.div
+            style={{ y: imageY }}
+            className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line"
+          >
+            <Image
+              src={company.image.src}
+              alt={company.image.alt}
+              fill
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </motion.div>
+        </Reveal>
+        <Reveal direction="right" className="lg:order-1">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">{company.eyebrow}</p>
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-text sm:text-4xl">{company.heading}</h2>
+          <p className="mt-4 text-base leading-relaxed text-text-dim">{company.body}</p>
+        </Reveal>
+      </div>
 
-        <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-            {foundation.eyebrow}
-          </p>
-          <h2 className="text-balance font-display text-3xl font-medium leading-tight tracking-tight text-paper sm:text-4xl">
-            {foundation.heading}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-paper/65">{foundation.body}</p>
-
-          <div className="mt-10 border-t border-line/70 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-              {teamGrowth.eyebrow}
-            </p>
-            <h3 className="mt-2 font-display text-xl font-semibold text-paper">
-              {teamGrowth.heading}
-            </h3>
-            <dl className="mt-6 space-y-5">
-              {teamGrowth.points.map((point) => (
-                <div key={point.title} className="flex gap-4">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-400" />
-                  <div>
-                    <dt className="font-semibold text-paper">{point.title}</dt>
-                    <dd className="mt-1 text-sm leading-relaxed text-paper/60">{point.body}</dd>
-                  </div>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
+      <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
+        <Reveal className="border-t border-line pt-14 text-center">
+          <p className="mx-auto max-w-2xl text-lg font-semibold text-text">{awardsHome.heading}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-text-dim">{awardsHome.body}</p>
+        </Reveal>
+        <Marquee className="mt-10">
+          {pressLogos.map((press) => (
+            <Image
+              key={press.name}
+              src={press.src}
+              alt={press.name}
+              width={180}
+              height={52}
+              className="h-10 w-auto shrink-0 object-contain opacity-50 grayscale transition-all hover:opacity-90 hover:grayscale-0 sm:h-11"
+            />
+          ))}
+        </Marquee>
       </div>
     </section>
   );

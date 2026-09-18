@@ -9,16 +9,11 @@ interface FaqItem {
   answer: string;
 }
 
-interface FaqAccordionProps {
-  items: readonly FaqItem[];
-  className?: string;
-}
-
-export function FaqAccordion({ items, className }: FaqAccordionProps) {
+export function FaqAccordion({ items, className }: { items: readonly FaqItem[]; className?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className={cn("divide-y divide-line/70 rounded-2xl border border-line/80 bg-surface/60", className)}>
+    <div className={cn("divide-y divide-line rounded-xl border border-line bg-surface", className)}>
       {items.map((item, i) => {
         const open = openIndex === i;
         return (
@@ -27,13 +22,13 @@ export function FaqAccordion({ items, className }: FaqAccordionProps) {
               type="button"
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="group flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-ink-2"
             >
-              <span className="font-display text-base font-medium text-paper">{item.question}</span>
+              <span className="font-semibold text-text">{item.question}</span>
               <motion.span
                 animate={{ rotate: open ? 45 : 0 }}
-                transition={{ duration: 0.25 }}
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-paper/60"
+                transition={{ duration: 0.2 }}
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-text-dim transition-colors duration-200 group-hover:border-brand-400 group-hover:text-brand-400"
                 aria-hidden
               >
                 +
@@ -45,10 +40,10 @@ export function FaqAccordion({ items, className }: FaqAccordionProps) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-5 text-sm leading-relaxed text-paper/65">{item.answer}</p>
+                  <p className="px-6 pb-5 text-sm leading-relaxed text-text-dim">{item.answer}</p>
                 </motion.div>
               ) : null}
             </AnimatePresence>

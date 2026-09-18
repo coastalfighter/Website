@@ -2,57 +2,58 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  /* A "digital readout" mono, used for stat counters and signal-style UI
-     bits — the one deliberately telecom/network-equipment-flavored font
-     choice, everything else stays on the clean sans/display pair. */
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* A bright theme with a strong blue undertone throughout — "ink"/"ink-2"
-     are pale blue rather than pure white, and every section additionally
-     carries a .gradient-wash layer (see below) for real gradient depth, not
-     just a flat tinted color. "ink" and "paper" keep their names from the
-     original dark theme (ink = section background, paper = the
-     text/foreground color that sits on it) so components didn't need to
-     change — only these token values did. Hero and PageHeader are the two
-     intentional exceptions: they stay dark bands by using literal colors
-     (bg-black, text-white) instead of these tokens. */
-  --color-ink: #eef4ff;
-  --color-ink-2: #e2ecfe;
-  --color-surface: #f7faff;
-  --color-surface-2: #e9f1fe;
-  --color-line: #cddcf5;
+  /* A deep navy, not pure black — lets the logo's blue and red glow rather
+     than go flat against the background. */
+  --color-ink: #0a0e1a;
+  --color-ink-2: #0d1220;
+  --color-surface: #111827;
+  --color-line: #1f2b45;
 
-  --color-paper: #0f172a;
-  --color-paper-dim: #475467;
+  --color-text: #f1f5f9;
+  --color-text-dim: #94a3b8;
 
-  --color-brand-500: #3b82f6;
-  --color-brand-400: #60a5fa;
-  --color-brand-300: #93c5fd;
-  /* A darker blue for text/links on the light background — brand-300/400 are
-     too light to meet contrast requirements as foreground text on white. */
-  --color-brand-ink: #1d4ed8;
+  /* Blue and red, sampled directly from the CMC mark. */
+  --color-brand-600: #1c86b8;
+  --color-brand-500: #29a9e0;
+  --color-brand-400: #5cc3ea;
+  --color-brand-300: #9adcf3;
 
-  /* Red, matching the CMC shield's right half — the palette's accent color. */
-  --color-accent-500: #ef4444;
-  --color-accent-400: #f87171;
-  /* Same reasoning as brand-ink, for the red accent used in eyebrow labels. */
-  --color-accent-ink: #b91c1c;
+  --color-accent-600: #c21f26;
+  --color-accent-500: #e9333a;
+  --color-accent-400: #f0656a;
 
-  /* A deep navy — stays in the blue family, used sparingly for decorative
-     variety (a third tone among low-opacity blobs/gradients) rather than
-     introducing an unrelated hue. */
-  --color-signal-500: #1e3a8a;
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.2), 0 8px 24px -8px rgb(0 0 0 / 0.35);
+  --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-500) 35%, transparent);
 
-  --shadow-glow: 0 0 60px 0 color-mix(in oklab, var(--color-brand-400) 35%, transparent);
-  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 8px -2px rgb(15 23 42 / 0.06);
-
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-blob-drift: blob-drift 16s ease-in-out infinite;
+  --animate-blob-drift-slow: blob-drift 22s ease-in-out infinite reverse;
   --animate-marquee: marquee 32s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
-  --animate-drift: drift 14s ease-in-out infinite;
-  --animate-signal-bar: signal-bar 1.2s ease-in-out infinite;
 
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes blob-drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(4%, -6%) scale(1.08);
+    }
+    66% {
+      transform: translate(-5%, 4%) scale(0.96);
+    }
+  }
   @keyframes marquee {
     from {
       transform: translateX(0);
@@ -61,66 +62,11 @@
       transform: translateX(-50%);
     }
   }
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-14px);
-    }
-  }
-  @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 0.4;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-  @keyframes drift {
-    0% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(14px, -18px) rotate(4deg);
-    }
-    50% {
-      transform: translate(-6px, -32px) rotate(-3deg);
-    }
-    75% {
-      transform: translate(-16px, -10px) rotate(2deg);
-    }
-    100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-  }
-  @keyframes signal-bar {
-    0%,
-    100% {
-      transform: scaleY(0.4);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scaleY(1);
-      opacity: 1;
-    }
-  }
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
   scroll-behavior: smooth;
-}
-
-@keyframes kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.12);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,7 +85,7 @@ html {
 
 body {
   background: var(--color-ink);
-  color: var(--color-paper);
+  color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -153,42 +99,153 @@ body {
   text-wrap: balance;
 }
 
-/**
- * The site's "gradient, major-blue" base. Layer this on any
- * `relative overflow-hidden` section (it sits behind content via -z-10) —
- * it doesn't replace the section's bg-ink/bg-ink-2 color, it adds real
- * gradient depth on top of it so the whole page reads as one blue field
- * rather than flat white panels.
- */
-.gradient-wash {
+/** A soft grid, barely visible, for texture under dark sections. */
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+/** Two blurred brand-colored blobs, gently drifting — the one decorative
+ * background treatment used across dark sections. */
+.glow-field {
   position: absolute;
   inset: 0;
   z-index: -10;
+  overflow: hidden;
   pointer-events: none;
-  background-image:
-    radial-gradient(
-      120% 90% at 12% -10%,
-      color-mix(in oklab, var(--color-brand-500) 22%, transparent),
-      transparent 55%
-    ),
-    radial-gradient(
-      90% 80% at 100% 10%,
-      color-mix(in oklab, var(--color-brand-400) 16%, transparent),
-      transparent 60%
-    ),
-    radial-gradient(
-      80% 70% at 20% 115%,
-      color-mix(in oklab, var(--color-accent-500) 12%, transparent),
-      transparent 60%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--color-brand-500) 5%, transparent),
-      transparent 40%
-    );
+}
+.glow-field::before,
+.glow-field::after {
+  content: "";
+  position: absolute;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 9999px;
+  filter: blur(120px);
+}
+.glow-field::before {
+  top: -10rem;
+  left: -10rem;
+  background: color-mix(in oklab, var(--color-brand-500) 30%, transparent);
+  animation: var(--animate-blob-drift);
+}
+.glow-field::after {
+  bottom: -14rem;
+  right: -10rem;
+  background: color-mix(in oklab, var(--color-accent-500) 22%, transparent);
+  animation: var(--animate-blob-drift-slow);
 }
 
-.noise-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  background-size: 160px 160px;
+/** A dimmer, page-wide version of glow-field — fixed to the viewport so
+ * every section has some ambient color and grid texture, even ones that
+ * don't opt into their own stronger glow-field. Three blobs spread across
+ * the viewport (not just two corners) so the middle of the screen isn't
+ * left flat. */
+.page-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -50;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-glow::before,
+.page-glow::after {
+  content: "";
+  position: absolute;
+  width: 50rem;
+  height: 50rem;
+  border-radius: 9999px;
+  filter: blur(130px);
+  opacity: 0.5;
+}
+.page-glow::before {
+  top: -16rem;
+  left: -16rem;
+  background: color-mix(in oklab, var(--color-brand-500) 38%, transparent);
+  animation: var(--animate-blob-drift);
+}
+.page-glow::after {
+  bottom: -20rem;
+  right: -16rem;
+  background: color-mix(in oklab, var(--color-accent-500) 28%, transparent);
+  animation: var(--animate-blob-drift-slow);
+}
+.page-glow-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42rem;
+  height: 42rem;
+  border-radius: 9999px;
+  filter: blur(140px);
+  opacity: 0.22;
+  background: color-mix(in oklab, var(--color-brand-400) 30%, transparent);
+  transform: translate(-50%, -50%);
+  animation: var(--animate-blob-drift) reverse;
+}
+
+/** A full-viewport variant of the grid texture — unlike .grid-pattern
+ * (which fades out by mid-section, designed for top-anchored hero use),
+ * this stays visible across the whole fixed viewport rectangle so it
+ * reads at any scroll position on any page. */
+.grid-pattern-ambient {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 95% 95% at 50% 50%, black 60%, transparent 100%);
+}
+
+/** A faint animated film-grain texture over everything — cheap, static
+ * per-frame, but breaks up flat gradient banding for a more tactile,
+ * premium feel. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -30;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCUyM24pIi8+PC9zdmc+");
+}
+
+/** Custom cursor: hides the native cursor everywhere once the JS cursor
+ * is active (desktop, fine-pointer, motion-permitting only). */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+/** The one text-link hover effect used everywhere: an underline that
+ * slides in from the left, instead of an instant on/off underline. */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/** Hides the scrollbar chrome on an internally-scrollable container
+ * without disabling scroll — used by HeightMatchedRow's right panel. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

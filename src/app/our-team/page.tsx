@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { AvatarInitials } from "@/components/ui/AvatarInitials";
-import { TiltCard } from "@/components/ui/TiltCard";
-import { GlowField } from "@/components/ui/GlowField";
-import { MagneticCta } from "@/components/hero/MagneticCta";
-import { leadershipTeam } from "@/data/about";
-import { teamMission, serviceAreas, teamPartners, teamQuote } from "@/data/ourTeam";
+import { Reveal } from "@/components/ui/Reveal";
+import { Button } from "@/components/ui/Button";
+import { leadershipTeam, independentPartners } from "@/data/about";
+import { slugify } from "@/lib/slugify";
 
 export const metadata: Metadata = {
   title: "Our Team",
-  description: teamMission.body,
+  description: "Meet the people behind CMC Group.",
 };
 
 export default function OurTeamPage() {
@@ -18,85 +17,74 @@ export default function OurTeamPage() {
     <>
       <PageHeader
         eyebrow="Our Team"
-        heading={teamMission.heading}
-        body={teamMission.body}
-        image={{
-          src: "/images/photos/mes02960.webp",
-          alt: "CMC Group leadership reviewing team performance",
-        }}
+        heading="The people behind CMC Group"
+        body="A leadership team built almost entirely from people who started on the doors — every headshot below is a placeholder, easy to swap."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Our Team" }]}
+        image={{
+          src: "/images/placeholders/team-header.jpg",
+          alt: "Placeholder — replace with your own photo at public/images/placeholders/team-header.jpg",
+        }}
       />
 
-      <section className="relative overflow-hidden bg-ink py-24 sm:py-32">
-        <GlowField />
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Our People" heading="Three service areas, one growth engine" />
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {serviceAreas.map((area, i) => (
-              <TiltCard key={area.title} delay={i * 0.08}>
-                <h3 className="font-display text-lg font-semibold text-paper">{area.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper/60">{area.description}</p>
-              </TiltCard>
-            ))}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Leadership" heading="Meet the team" align="center" className="mx-auto" />
+          <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+            {leadershipTeam.map((member, i) => {
+              const src = `/images/placeholders/team/${slugify(member.name)}.jpg`;
+              return (
+                <Reveal key={member.name} delay={(i % 4) * 0.06}>
+                  <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${member.name} — replace at public${src}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-4 font-semibold text-text">{member.name}</p>
+                  <p className="text-sm text-text-dim">{member.title}</p>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
-        <GlowField />
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Leadership" heading="Built for growth" align="center" className="mx-auto" />
-          <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {leadershipTeam.map((member, i) => (
-              <TiltCard key={member.name} delay={(i % 5) * 0.05} className="text-center">
-                <AvatarInitials name={member.name} seed={i} />
-                <p className="mt-3 font-semibold text-paper">{member.name}</p>
-                <p className="text-xs text-paper/55">{member.title}</p>
-              </TiltCard>
-            ))}
+      <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" align="center" className="mx-auto" />
+          <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+            {independentPartners.map((partner, i) => {
+              const src = `/images/placeholders/team/${slugify(partner.name)}.jpg`;
+              return (
+                <Reveal key={partner.name} delay={(i % 4) * 0.05}>
+                  <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${partner.name} — replace at public${src}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-4 font-semibold text-text">{partner.name}</p>
+                  <p className="text-sm text-text-dim">{partner.org}</p>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-20 sm:py-28">
-        <GlowField />
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-6 text-center lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-ink">
-            D2D U: Training Tomorrow&apos;s Leaders
+      <section className="py-20">
+        <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center lg:px-8">
+          <h2 className="text-balance text-3xl font-bold text-text sm:text-4xl">Want to see your headshot here?</h2>
+          <p className="text-base leading-relaxed text-text-dim">
+            We&apos;re always looking for people who want to build a career, not just take a job.
           </p>
-          <h2 className="text-balance font-display text-2xl font-medium text-paper sm:text-3xl">
-            Every leader here started on the doors — see the path.
-          </h2>
-          <MagneticCta href="/careers" variant="secondary">
-            View Careers &amp; Training
-          </MagneticCta>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-ink-2 py-24 sm:py-32">
-        <GlowField />
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" />
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {teamPartners.map((partner, i) => (
-              <TiltCard key={partner.name} delay={(i % 4) * 0.05} className="p-5">
-                <p className="text-sm font-medium text-paper/85">{partner.name}</p>
-                <p className="text-xs text-paper/60">{partner.org}</p>
-              </TiltCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-ink py-24">
-        <GlowField />
-        <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
-          <p className="text-balance font-display text-2xl italic leading-snug text-paper/85 sm:text-3xl">
-            &ldquo;{teamQuote.text}&rdquo;
-          </p>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-accent-ink">
-            &mdash; {teamQuote.author}
-          </p>
+          <Button href="/careers">See Open Positions</Button>
         </div>
       </section>
     </>

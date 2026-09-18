@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-line/80 bg-surface/60 px-4 py-3 text-sm text-paper placeholder:text-paper/35 outline-none transition-colors focus:border-brand-400";
+  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim/50 outline-none transition-colors focus:border-brand-400";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -28,7 +27,6 @@ export function ContactForm() {
       });
 
       const data = (await response.json()) as { error?: string };
-
       if (!response.ok) {
         throw new Error(data.error ?? "Something went wrong. Please try again.");
       }
@@ -43,18 +41,12 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        // Deliberately a literal green, not the accent token — accent is
-        // brand red now, and a red "success" box would read as an error.
-        className="rounded-2xl border border-emerald-400/40 bg-emerald-400/10 p-8 text-center"
-      >
-        <p className="font-display text-xl font-semibold text-paper">Thank you!</p>
-        <p className="mt-2 text-sm text-paper/70">
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-8 text-center">
+        <p className="text-xl font-semibold text-text">Thank you!</p>
+        <p className="mt-2 text-sm text-text-dim">
           Your submission has been received. A member of our team will reach out shortly.
         </p>
-      </motion.div>
+      </div>
     );
   }
 
@@ -62,13 +54,13 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-2 block text-sm font-medium text-paper/80">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-text">
             Full Name
           </label>
           <input id="name" name="name" type="text" required className={inputClasses} />
         </div>
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium text-paper/80">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-text">
             Email
           </label>
           <input id="email" name="email" type="email" required className={inputClasses} />
@@ -76,27 +68,21 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="subject" className="mb-2 block text-sm font-medium text-paper/80">
+        <label htmlFor="subject" className="mb-2 block text-sm font-medium text-text">
           Subject
         </label>
         <input id="subject" name="subject" type="text" required className={inputClasses} />
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-2 block text-sm font-medium text-paper/80">
+        <label htmlFor="message" className="mb-2 block text-sm font-medium text-text">
           Message
         </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          className={`${inputClasses} resize-none`}
-        />
+        <textarea id="message" name="message" required rows={5} className={`${inputClasses} resize-none`} />
       </div>
 
       {status === "error" && errorMessage ? (
-        <p role="alert" className="text-sm text-red-400">
+        <p role="alert" className="text-sm text-accent-600">
           {errorMessage}
         </p>
       ) : null}
@@ -104,7 +90,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-full bg-paper px-6 py-3.5 text-sm font-semibold text-ink transition-transform duration-300 hover:scale-[1.02] active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-md bg-brand-500 px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-brand-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send Message"}
       </button>

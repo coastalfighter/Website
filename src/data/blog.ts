@@ -11,8 +11,7 @@ export const blogPosts: BlogPost[] = [
     slug: "about-cmc",
     title: "About CMC",
     date: "2022-11-22",
-    excerpt:
-      "Who we are, why we exist, and what a CMC partnership actually looks like day to day.",
+    excerpt: "Who we are, why we exist, and what a CMC partnership actually looks like day to day.",
     paragraphs: [
       "CMC Group started with a simple idea: telecom and security brands grow fastest when a real person can sit across the table from a customer and answer their questions honestly. A decade later, that's still the whole business.",
       "We're a nationwide customer acquisition firm — an authorized dealer for brands like DirecTV, ADT, AT&T, Frontier, Verizon, and Ooma — built around trained, professional field representatives rather than call centers or ad spend alone.",

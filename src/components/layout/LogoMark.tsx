@@ -1,35 +1,24 @@
 import { cn } from "@/lib/cn";
 
-/**
- * The CMC shield: a blue/red split crest with a white crown at its center.
- * Colors are fixed (not theme tokens) — this is the literal brand mark and
- * must render the same regardless of light/dark context it's placed on.
- */
+/** Honest placeholder mark — not an attempt at the real CMC logo. Drop the
+ * actual file at public/brand/logo.svg (or .png) and BrandMark renders it
+ * instead automatically. */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 200 205"
-      className={cn("h-8 w-8", className)}
-      role="img"
-      aria-label="CMC Group"
-    >
-      <path
-        d="M40,10 L100,30 L100,195 L20,120 L20,60 Z"
-        fill="#1E6FE0"
-      />
-      <path
-        d="M160,10 L100,30 L100,195 L180,120 L180,60 Z"
-        fill="#E0272A"
-      />
-      <g fill="#ffffff">
-        <rect x="70" y="88" width="60" height="16" rx="2" />
-        <polygon points="70,90 82,90 76,58" />
-        <polygon points="89,90 111,90 100,46" />
-        <polygon points="118,90 130,90 124,58" />
-        <circle cx="76" cy="55" r="5" />
-        <circle cx="100" cy="43" r="6" />
-        <circle cx="124" cy="55" r="5" />
-      </g>
+    <svg viewBox="0 0 40 40" className={cn("h-8 w-8", className)} role="img" aria-label="CMC Group (placeholder logo)">
+      <rect x="1" y="1" width="38" height="38" rx="10" fill="currentColor" fillOpacity="0.08" stroke="currentColor" strokeOpacity="0.4" strokeDasharray="3 3" />
+      <text
+        x="20"
+        y="25"
+        textAnchor="middle"
+        fontSize="12"
+        fontWeight="700"
+        letterSpacing="0.5"
+        fill="currentColor"
+        fontFamily="var(--font-mono), ui-monospace, monospace"
+      >
+        CMC
+      </text>
     </svg>
   );
 }

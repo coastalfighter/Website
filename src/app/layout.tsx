@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { siteConfig } from "@/data/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ScrollProgressBar } from "@/components/layout/ScrollProgressBar";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { PageLoader } from "@/components/ui/PageLoader";
+import { NetworkCanvas } from "@/components/home/NetworkCanvas";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -28,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Sales Execution & Business Growth Solutions`,
+    default: `${siteConfig.name} | Nationwide Customer Acquisition`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -39,29 +35,30 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
-    >
-      <body className="min-h-screen bg-ink pb-20 font-sans antialiased sm:pb-0">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen bg-ink pb-16 font-sans text-text antialiased sm:pb-0">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-brand-500 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-brand-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink"
         >
           Skip to content
         </a>
-        <ScrollProgressBar />
+        <div aria-hidden className="page-glow">
+          <div className="page-glow-center" />
+        </div>
+        <div aria-hidden className="grid-pattern-ambient fixed inset-0 -z-50" />
+        <NetworkCanvas
+          className="pointer-events-none fixed inset-0 -z-40 h-full w-full opacity-70"
+          nodeCount={28}
+          linkDistance={170}
+        />
+        <div aria-hidden className="grain-overlay" />
+        <PageLoader />
+        <CustomCursor />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

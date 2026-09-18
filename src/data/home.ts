@@ -1,75 +1,60 @@
+export const heroContent = {
+  eyebrow: "Industry-leading solutions for over a decade",
+  headline: "Built on performance, powered by people.",
+  subcopy:
+    "CMC Group partners with leading telecom and technology brands to drive measurable growth, expand markets, and build lasting customer relationships.",
+  cta: { label: "Get Started", href: "/contact" },
+  secondaryCta: { label: "See What We Do", href: "/what-we-do" },
+} as const;
+
 export const solutions = [
   {
     title: "Sales Solutions",
     description:
-      "CMC represents top telecom and technology brands through professional, performance-driven sales teams that engage customers face to face.",
-    icon: "target",
+      "CMC represents top telecom and technology brands through professional, performance-driven sales teams. We deliver measurable growth by connecting clients with qualified business customers in key markets nationwide.",
   },
   {
     title: "Market Expansion",
     description:
-      "From pilot programs to multi-state rollouts, we help partner brands scale into new territories with proven, repeatable playbooks.",
-    icon: "map",
+      "From pilot programs to multi-state rollouts, we help enterprise partners grow with confidence. Our proven process ensures consistent results, brand alignment, and scalable operations wherever clients need coverage.",
   },
   {
     title: "Channel Sales Support",
     description:
-      "CMC Group strengthens sales outcomes by providing trained representatives who engage customers with clarity and professionalism.",
-    icon: "handshake",
+      "CMC Group strengthens sales outcomes by providing trained representatives who engage customers with clarity and professionalism. We strengthen partner channels through structured sales processes and consistent brand alignment.",
   },
 ] as const;
 
-export const foundation = {
-  eyebrow: "Company Foundation",
-  heading: "A nationwide customer acquisition firm, built on relationships",
-  body: "CMC Group is a nationwide customer acquisition firm partnering with leading telecom and technology brands to drive business growth. We combine field expertise, data-driven operations, and a commitment to quality on every account we represent.",
-} as const;
+export const solutionsCta = { label: "View All Services", href: "/what-we-do" } as const;
 
-export const teamGrowth = {
-  eyebrow: "Team Growth",
-  heading: "D2D U: training tomorrow's leaders",
-  points: [
-    {
-      title: "Hands-on coaching",
-      body: "Every rep is paired with experienced field leadership from day one, not left to figure it out alone.",
-    },
-    {
-      title: "Promoted from within",
-      body: "Our management team is built almost entirely from people who started on the doors — leadership is earned, not imported.",
-    },
-    {
-      title: "Culture-first values",
-      body: "Integrity, accountability, and collaboration are trained the same way a sales pitch is: deliberately, and every day.",
-    },
+export const teamGrowthHome = {
+  eyebrow: "Our Team Growth",
+  heading: "Success starts with our people",
+  body: "At CMC Group, we believe success starts with our people. Through D2D U, our dedicated training program, we equip every team member with the tools, mentorship, and leadership development needed to thrive in sales and marketing. We grow talent from within, creating future leaders who drive both personal and company success.",
+  checklist: [
+    "D2D U provides hands-on coaching and real-world sales experience that builds lasting confidence.",
+    "We promote from within, offering a clear path from entry-level to management and beyond.",
+    "Collaboration, ambition, and accountability define our teams and the leaders who rise from them.",
   ],
+  cta: { label: "Join Our Team", href: "/careers" },
+  image: {
+    src: "/images/placeholders/team-growth.jpg",
+    alt: "Placeholder — replace with your own photo at public/images/placeholders/team-growth.jpg",
+  },
 } as const;
 
-export const testimonials = [
-  {
-    name: "Andre Parada",
-    detail:
-      "A CMC partner for more than a decade, citing consistent service and steady account growth.",
+export const company = {
+  eyebrow: "Our Company",
+  heading: "A nationwide customer acquisition firm, built on relationships",
+  body: "CMC Group is a nationwide customer acquisition firm partnering with leading telecom and technology brands to drive business growth. We combine proven sales systems, data-backed strategy, and a culture of leadership to deliver consistent, high-quality results. Built on professionalism and performance, CMC continues to expand its reach while setting new standards for trust and scalability in the industry.",
+  image: {
+    src: "/images/placeholders/company-team.jpg",
+    alt: "Placeholder — replace with your own photo at public/images/placeholders/company-team.jpg",
   },
-  {
-    name: "Henry Vargas",
-    detail: "Highlighted the responsiveness and professionalism of his CMC service team.",
-  },
-  {
-    name: "Jennifer Mendoza",
-    detail: "Reported a meaningful reduction in her monthly bill after switching through CMC.",
-  },
-  {
-    name: "Corey Yee",
-    detail: "Pointed to real cost savings after working directly with a CMC representative.",
-  },
-  {
-    name: "Russell Hirata",
-    detail: "Saw his business account service improve significantly working with CMC.",
-  },
-] as const;
+} as const;
 
 export const finalCta = {
   heading: "Ready to put a proven team behind your brand?",
-  body: "Tell us about your market and we'll show you how CMC's field teams can get you there.",
-  cta: { label: "Start a Conversation", href: "/contact" },
+  body: "We place your business goals at the forefront of our strategy, prioritizing collaboration and consistent feedback to guarantee that every campaign aligns with your vision.",
+  cta: { label: "Get Started", href: "/contact" },
 } as const;

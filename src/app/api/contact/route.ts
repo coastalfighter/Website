@@ -1,58 +1,45 @@
 import { NextResponse } from "next/server";
-import { siteConfig } from "@/data/site";
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface ContactPayload {
-  name?: unknown;
-  email?: unknown;
-  subject?: unknown;
-  message?: unknown;
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: Request) {
   let payload: ContactPayload;
-
   try {
-    payload = (await request.json()) as ContactPayload;
+    payload = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const name = typeof payload.name === "string" ? payload.name.trim() : "";
-  const email = typeof payload.email === "string" ? payload.email.trim() : "";
-  const subject = typeof payload.subject === "string" ? payload.subject.trim() : "";
-  const message = typeof payload.message === "string" ? payload.message.trim() : "";
-
+  const { name, email, subject, message } = payload;
   if (!name || !email || !subject || !message) {
     return NextResponse.json({ error: "All fields are required." }, { status: 400 });
   }
-
-  if (!EMAIL_PATTERN.test(email)) {
+  if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_FORM_TO_EMAIL || siteConfig.email;
+  const toEmail = process.env.CONTACT_FORM_TO_EMAIL;
   const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL;
 
-  if (!apiKey || !fromEmail) {
-    console.error(
-      "Contact form submission received but email delivery is not configured (missing RESEND_API_KEY or CONTACT_FORM_FROM_EMAIL).",
-      { name, email, subject }
-    );
-    return NextResponse.json(
-      { error: "Email delivery is not configured on the server yet. Please try again later." },
-      { status: 503 }
-    );
+  if (!apiKey || !toEmail || !fromEmail) {
+    // No email service configured (e.g. local dev) — accept the submission
+    // without sending anything rather than failing the whole form.
+    console.warn("Contact form submitted without RESEND_API_KEY configured; skipping email send.", {
+      name,
+      email,
+      subject,
+    });
+    return NextResponse.json({ ok: true });
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -65,24 +52,13 @@ export async function POST(request: Request): Promise<NextResponse> {
       from: fromEmail,
       to: toEmail,
       reply_to: email,
-      subject: `[CMC Contact Form] ${subject}`,
-      html: `
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-        <p><strong>Message:</strong></p>
-        <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
-      `,
+      subject: `New contact form submission: ${subject}`,
+      text: `From: ${name} <${email}>\n\n${message}`,
     }),
   });
 
   if (!response.ok) {
-    const body = await response.text();
-    console.error("Resend API error", response.status, body);
-    return NextResponse.json(
-      { error: "We couldn't send your message right now. Please try again shortly." },
-      { status: 502 }
-    );
+    return NextResponse.json({ error: "Failed to send your message. Please try again." }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
