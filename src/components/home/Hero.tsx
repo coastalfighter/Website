@@ -2,15 +2,28 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { GradientText } from "@/components/ui/GradientText";
 import { NetworkCanvas } from "./NetworkCanvas";
 import { heroContent } from "@/data/home";
 import { heroStats } from "@/data/site";
+import { LOADER_DURATION_S } from "@/lib/loaderTiming";
 
 const HIGHLIGHT = "powered by people";
+
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+
+const textContainer: Variants = {
+  hidden: {},
+  visible: { transition: { delayChildren: LOADER_DURATION_S, staggerChildren: 0.12 } },
+};
+
+const textItem: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_OUT_EXPO } },
+};
 
 export function Hero() {
   const [before, after] = heroContent.headline.split(HIGHLIGHT);
@@ -46,24 +59,32 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-linear-to-b from-transparent to-ink" />
 
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-24">
-        <div>
-          <p className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand-400 backdrop-blur">
+        <motion.div variants={textContainer} initial={reducedMotion ? false : "hidden"} animate="visible">
+          <motion.p
+            variants={textItem}
+            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-brand-400 backdrop-blur"
+          >
             <span className="h-1.5 w-1.5 rounded-full bg-accent-400 animate-pulse" />
             {heroContent.eyebrow}
-          </p>
-          <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-text sm:text-5xl lg:text-6xl">
+          </motion.p>
+          <motion.h1
+            variants={textItem}
+            className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-text sm:text-5xl lg:text-6xl"
+          >
             {before}
             <GradientText>{HIGHLIGHT}</GradientText>
             {after}
-          </h1>
-          <p className="mt-5 max-w-lg text-balance text-lg leading-relaxed text-text-dim">{heroContent.subcopy}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          </motion.h1>
+          <motion.p variants={textItem} className="mt-5 max-w-lg text-balance text-lg leading-relaxed text-text-dim">
+            {heroContent.subcopy}
+          </motion.p>
+          <motion.div variants={textItem} className="mt-8 flex flex-wrap items-center gap-4">
             <Button href={heroContent.cta.href}>{heroContent.cta.label}</Button>
             <Button href={heroContent.secondaryCta.href} variant="onDark">
               {heroContent.secondaryCta.label}
             </Button>
-          </div>
-          <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-6">
+          </motion.div>
+          <motion.dl variants={textItem} className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-6">
             {heroStats.map((stat) => (
               <div key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>
@@ -73,16 +94,22 @@ export function Hero() {
                 <p className="mt-1 text-sm text-text-dim">{stat.label}</p>
               </div>
             ))}
-          </dl>
-        </div>
+          </motion.dl>
+        </motion.div>
 
-        <motion.div style={{ y: photoY }} className="relative">
+        <motion.div
+          style={{ y: photoY }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: LOADER_DURATION_S + 0.1, ease: EASE_OUT_EXPO }}
+          className="relative"
+        >
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-linear-to-br from-brand-500/20 to-accent-500/20 blur-2xl" />
           <motion.div
             onMouseMove={handlePhotoMove}
             onMouseLeave={handlePhotoLeave}
             style={{ rotateX, rotateY, transformPerspective: 1200 }}
-            className="group relative aspect-4/5 animate-fade-up overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square"
+            className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-white/10 shadow-glow lg:aspect-square"
           >
             <Image
               src="/images/placeholders/hero-team.jpg"
@@ -97,8 +124,12 @@ export function Hero() {
 
           <motion.div
             aria-hidden={false}
-            animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: [0, -10, 0] }}
+            transition={{
+              opacity: { duration: 0.6, delay: LOADER_DURATION_S + 0.5, ease: EASE_OUT_EXPO },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: LOADER_DURATION_S + 0.5 },
+            }}
             style={{ transform: "perspective(600px) rotateX(8deg) rotateY(-10deg)" }}
             className="absolute -top-6 -left-6 z-10 rounded-xl border border-white/10 bg-ink-2/80 px-4 py-3 shadow-glow backdrop-blur-md"
           >
@@ -110,8 +141,12 @@ export function Hero() {
 
           <motion.div
             aria-hidden={false}
-            animate={reducedMotion ? undefined : { y: [0, 10, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            initial={reducedMotion ? false : { opacity: 0, y: -30 }}
+            animate={reducedMotion ? undefined : { opacity: 1, y: [0, 10, 0] }}
+            transition={{
+              opacity: { duration: 0.6, delay: LOADER_DURATION_S + 0.65, ease: EASE_OUT_EXPO },
+              y: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: LOADER_DURATION_S + 0.65 },
+            }}
             style={{ transform: "perspective(600px) rotateX(-8deg) rotateY(10deg)" }}
             className="absolute -right-5 -bottom-5 z-10 rounded-xl border border-white/10 bg-ink-2/80 px-4 py-3 shadow-glow backdrop-blur-md"
           >

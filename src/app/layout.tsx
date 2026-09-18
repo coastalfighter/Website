@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { PageLoader } from "@/components/ui/PageLoader";
 import { NetworkCanvas } from "@/components/home/NetworkCanvas";
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           linkDistance={170}
         />
         <div aria-hidden className="grain-overlay" />
+        <PageLoader />
         <CustomCursor />
         <Navbar />
         <main id="main-content">{children}</main>
