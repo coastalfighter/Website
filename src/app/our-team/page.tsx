@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { leadershipTeam } from "@/data/about";
+import { leadershipTeam, independentPartners } from "@/data/about";
 import { slugify } from "@/lib/slugify";
 
 export const metadata: Metadata = {
@@ -45,6 +45,32 @@ export default function OurTeamPage() {
                   </div>
                   <p className="mt-4 font-semibold text-text">{member.name}</p>
                   <p className="text-sm text-text-dim">{member.title}</p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-line bg-ink-2 py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" align="center" className="mx-auto" />
+          <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+            {independentPartners.map((partner, i) => {
+              const src = `/images/placeholders/team/${slugify(partner.name)}.jpg`;
+              return (
+                <Reveal key={partner.name} delay={(i % 4) * 0.05}>
+                  <div className="group relative aspect-4/5 overflow-hidden rounded-2xl border border-line">
+                    <Image
+                      src={src}
+                      alt={`Placeholder headshot for ${partner.name} — replace at public${src}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-4 font-semibold text-text">{partner.name}</p>
+                  <p className="text-sm text-text-dim">{partner.org}</p>
                 </Reveal>
               );
             })}

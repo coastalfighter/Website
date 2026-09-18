@@ -21,7 +21,6 @@ import {
   leadershipTeam,
   serviceAreas,
   provenResults,
-  independentPartners,
   resultsInAction,
   teamQuote,
 } from "@/data/about";
@@ -165,20 +164,6 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <SectionHeading eyebrow="Our Partners" heading="Independent partners across our markets" />
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {independentPartners.map((partner, i) => (
-              <Card key={partner.name} delay={(i % 4) * 0.05} className="p-5">
-                <p className="text-sm font-medium text-text">{partner.name}</p>
-                <p className="text-xs text-text-dim">{partner.org}</p>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
